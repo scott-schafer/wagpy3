@@ -1,0 +1,7 @@
+
+
+<p>PURCHASES</p>
+{{ purchases }}
+        {% for purchase in purchases %}
+            <p>{{purchase.id}}-{{ purchase.product }}</p>
+        {% endfor %}

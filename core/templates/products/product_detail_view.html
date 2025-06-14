@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+    <h1>Hello from the ProductDetail_page!</h1>
+
+    {% if is_owner %}
+        <h1>Holly Smokes!!! It Worked!!!!!</h1>
+    {% endif %}
+
+
+{#    {% for product in products %}#}
+{#    <h1><a href="{{ product.url }}">{{ product.product_name }}</a></h1>#}
+{#    {% endfor %}#}
+{% endblock content %}

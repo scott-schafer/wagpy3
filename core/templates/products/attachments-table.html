@@ -1,0 +1,55 @@
+{% load static wagtailcore_tags purch_tags %}
+{#{% specific_purchase_data as purchase_data %}#}
+{% purchase_data as data %}
+{#{{ data }}#}
+{% for obj in data %}
+{{ obj.user }}
+    {{ obj.product_id }}
+    {{ page.page_id }}
+{% endfor %}
+{#{{ current_user }}#}
+{#{{ current_page }}#}
+{#{{ page.product.id }}#}
+
+{% if page.product_attachment %}
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Download
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+{#        {{ purchase_data }}#}
+{#        {{ page.product_name }}#}
+{#        {{ product_name }}#}
+{#        {{ purchase_data.product_id }}#}
+{#        {{ page_id }}#}
+{#        {{ page.id }}#}
+            {% for block in page.product_attachment %}
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   {{ block.value.title }}
+                </th>
+                <td class="px-6 py-4">
+                    {% if block.value.is_free %}Free download {% endif %}
+                </td>
+                <td class="px-6 py-4">
+{#                {% for object in data %}#}
+
+                    {% if object == True and object.product_id == page.product.id or block.value.is_free %}<a href="{{ block.value.url }}" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download</a>{% else %}Purchase to download{% endif %}
+                    </td>
+{#                {% endfor %}#}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}

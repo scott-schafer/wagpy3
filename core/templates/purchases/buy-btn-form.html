@@ -1,0 +1,32 @@
+{% load purch_tags %}
+{#{% specific_purchase_data as data %}#}
+{#{% purchase_data %}#}
+{#{% for me in purchase_objects %}#}
+{#{{ me.is_owner }}#}
+{#{% endfor %}#}
+{#{{ page.is_owner }}#}
+
+
+{% if page.product %}
+{#    {{ page.product }}#}
+<form class="mb-5 p-4 flex justify-center flex-col" method="POST" action="{% url 'purchases:start' %}">{% csrf_token %}
+        <input type="hidden" value="{{ page.stripe_price }}" name="stripe_price" />
+        <input type="hidden" value="{{ page.product.url }}" name="product_url" />
+        <input type="hidden" value="{{ page.product_name }}" name="product_name" />
+        <input type="hidden" value="{{ page.product.id }}" name="product_id" />
+
+    <div class="flex justify-center items-baseline mb-5 text-gray-900 dark:text-white">
+        <span class="text-3xl font-semibold">$</span>
+        <span class="text-5xl font-extrabold tracking-tight">{{ page.price }}</span>
+    </div>
+
+{#        {% if not request.user.is_authenticated %}#}
+        <div class="text-center">
+            <a class="w-full my-5 text-white text-center" href="/accounts/login/">Login or SignUp to purchase</a>
+        </div>
+{#        {% else %}#}
+    <button type="submit" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Buy Now</button>
+{#        {% endif %}#}
+</form>
+
+{% endif %}

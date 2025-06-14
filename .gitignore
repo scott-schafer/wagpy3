@@ -1,0 +1,8 @@
+./node_modules/
+./requirements/
+.env
+./env
+Dockerfile
+.dockerignore
+#/media
+.idea

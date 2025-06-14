@@ -1,0 +1,26 @@
+{#{% extends "base.html" %}#}
+
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+    <ul>
+{#    {{ my_objects }}#}
+    {% for obj in my_objects %}
+{#        {{ obj }}#}
+        <li>
+{#        {{ obj }}#}
+            <p>{{ obj.product_name }}</p>
+            <p>{{ obj.user }}</p>
+            <p>{{ obj.is_owner }}</p>
+            <p>{{ obj.product_id }}</p>
+            <p>{{ obj.complete }}</p>
+        </li>
+    {% empty %}
+        <li>No objects found.....</li>
+    {% endfor %}
+    </ul>
+
+    {% for item in product_model %}
+        {{ item }}
+    {% endfor %}
+{% endblock %}

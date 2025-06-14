@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% load purch_tags %}
+{% block content %}
+
+
+{% specific_purchase_data as data %}
+
+{#    {{ purchase_objects }}#}
+{#    {{ product_user }}#}
+{#    {{ data.product_name }}#}
+
+{#{% for data in my_objects %}#}
+{#      <p>{{ data.product_id }}</p>#}
+{##}
+{#    {{ prod_obj }}#}
+{##}
+{#    <h3>{{ prod_obj.product_name }}</h3>#}
+{#    <h3>{{ prod_obj.is_owner }}</h3>#}
+{#    <h3>{{ prod_obj.complete }}</h3>#}
+{#    <h3>{{ prod_obj.product_id }}</h3>#}
+{#    <h3>{{ current_user }}</h3>#}
+{#    <h3>{{ user }}</h3>#}
+{##}
+{#  {% endfor %}#}
+
+    {% for item in my_objects %}
+        {% if item.product_id == page.id %}
+{#            {{ item.is_owner }}#}
+    {% endif %}
+{% endfor %}
+
+
+{#    {{ user_auth }}#}
+{#{{ current_user }}#}
+
+{#    <ul>#}
+{#    {{ my_objects }}#}
+{#    {% for obj in my_objects %}#}
+{##}
+{#        {{ obj }}#}
+{#        {{ page_name }}#}
+{#        {% if obj.user == page.user and obj.product_id == page.id %}#}
+{#        <h2>Heck Yeah!!</h2>#}
+{#        {% else %}#}
+{#        <h2>Try again</h2>#}
+{#        {% endif %}#}
+{#        <li>#}
+{#        {{ obj }}#}
+{#            <p>{{ obj.product_name }}</p>#}
+{#            <p>{{ obj.user }}</p>#}
+{#            <p>{{ obj.is_owner }}</p>#}
+{#            <p>{{ obj.product_id }}</p>#}
+{#            <p>{{ obj.complete }}</p>#}
+{#        </li>#}
+{#    {% empty %}#}
+{#        <li>No objects found.....</li>#}
+{#    {% endfor %}#}
+{#    </ul>#}
+
+{#{{ obj.product_name }}#}
+
+{#    {{ product_id }}#}
+{#    {{ page_data }}#}
+{#    {{ object_user }}#}
+{#    {{ product_name }}#}
+        </br>
+{#    {% for prod in my_objects %}#}
+{#    {% for prod in product_name %}#}
+{#        {{ prod }}#}
+{#    {% endfor %}#}
+{#    {{ my_objects }}#}
+
+{#{% for prod in my_objects %}{% if prod.product_name == page.product_name %}{% endif %}{% endfor %}#}
+{#    <h2>Hell Yeah!!</h2>#}
+{#    {% else %}#}
+{#    <h2>Try again!</h2>#}
+{#    {% endif %}#}
+{##}
+{#{% endfor %}#}
+
+{#{{ object_user }}#}
+{#{{ product_name }}#}
+{#    {% for prod in prod_name %}#}
+{#    {{ prod }}#}
+{#    {% endfor %}#}
+{#{{ page.title }}#}
+{#    {% if page.title == prod_name %}#}
+{#    Wholy smokes#}
+{#    {% else %}#}
+{#    try Again#}
+{#    {% endif %}#}
+
+    {{ prod_name }}
+
+{#    {{ mydata }}#}
+
+{% if prod_name %}
+    <h2>Your Purchases</h2>
+    <ul>
+        {% for purchase in prod_name %}
+
+            <li>{{ purchase.product_name }} - {{ purchase.product_id }} - {{ purchase.is_owner }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No purchases found.</p>
+{% endif %}
+
+
+
+
+
+
+
+
+    <section class="w-full mt-[50px] flex justify-between">
+        <div class="containerr bg-white flex flex-col md:flex-row dark:bg-gray-800">
+
+            <div class="w-full md:w-3/4 space-y-10 p-[30px]">
+                <!-- main content-->
+                <h2 class="text-4xl font-bold md:mb-[50px] dark:text-white">{{ page.product_name }}</h2>
+
+
+                <p class="mb-3 font-light text-gray-500 dark:text-gray-400 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100 first-letter:mr-3 first-letter:float-left">
+                    Track work across the enterprise through an open, collaborative platform. Link issues across Jira
+                    and ingest data from other software development tools, so your IT support and operations teams have
+                    richer contextual information to rapidly respond to requests, incidents, and changes.</p>
+                <p class="font-light text-gray-500 dark:text-gray-400">Deliver great service experiences fast - without
+                    the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil,
+                    and deploy changes with ease, with a complete audit trail for every change.</p>
+
+
+{% if page.product_attachment %}
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Download
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+         {% for block in page.product_attachment %}
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   {{ block.value.title }}
+                </th>
+                <td class="px-6 py-4">
+                    {% if block.value.is_free %}Free download {% endif %}
+                </td>
+                <td class="px-6 py-4">
+{#            {% for obj in data %}#}
+{#                {% if item.product_id == page.product.id and current_user == True and user == item.user %}#}
+{#                    {% if obj.product_id == page.product.id and current_user == True and user == obj.user or block.value.is_free %}<a href="{{ block.value.url }}" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download</a>{% else %}Purchase to download{% endif %}#}
+{#            {% for obj in my_objects %}#}
+{#                    {% if item.product_id == page.product.id and current_user and user == item.user or block.value.is_free %}<a href="{{ block.value.url }}" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download</a>{% else %}Purchase to download{% endif %}#}
+
+{#            {% for item in my_objects %}#}
+{#        {% if item.product_id == page.id %}#}
+
+
+{#                {% if item.product_id == page.id or block.value.is_free %}#}
+{#                {% if item.product_id == page.id %}#}
+{#            {{ item.is_owner }}#}
+
+                {% for item in my_objects %}
+                    {% if page.is_owner or block.value.is_free %}
+                    <a href="{{ block.value.url }}" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download</a>
+                    {% else %}Purchase to download{% endif %}
+                {% endfor %}
+
+{#                    <a href="{{ block.value.url }}" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download</a>#}
+{#                {% else %}Purchase to download{% endif %}#}
+
+
+{#                    {% for prod in my_objects %}{% if prod.product_name == page.product_name or block.value.is_free %}{% endif %}{% endfor %}#}
+
+{#                {% for prod in my_objects %}{% if prod.product_name == page.product_name or block.value.is_free %}{% endif %}{% endfor %}<a href="{{ block.value.url }}" target="_blank" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download</a>Purchase to download#}
+
+                    </td>
+            </tr>
+          {% endfor %}
+{#         {% endif %}#}
+        </tbody>
+    </table>
+</div>
+            </div>
+
+            <!-- sidebar -->
+<div class="bg-white mt-[50px] pr-5 w-full md:w-1/4 space-y-4 dark:bg-gray-800 mx-auto">
+
+<div class="pt-[30px]">
+
+
+{#{% if prod_obj.product_id == page.id and prod_obj.is_owner == True %}#}
+{% if current_user == False or prod_obj.is_owner == True and prod_obj.product_id == page.id %}
+   <p class="text-center font-bold dark:text-white">You own this product.</p>
+{% endif %}
+
+{% if page.product %}
+
+    <form class="mb-5 p-4 flex justify-center flex-col" method="POST" action="{% url 'purchases:start' %}">{% csrf_token %}
+            <input type="hidden" value="{{ page.stripe_price }}" name="stripe_price" />
+            <input type="hidden" value="{{ page.product.url }}" name="product_url" />
+            <input type="hidden" value="{{ page.product_name }}" name="product_name" />
+            <input type="hidden" value="{{ page.product.id }}" name="product_id" />
+
+        <div class="flex justify-center items-baseline mb-5 text-gray-900 dark:text-white">
+            <span class="text-3xl font-semibold">$</span>
+            <span class="text-5xl font-extrabold tracking-tight">{{ page.price }}</span>
+        </div>
+            <div class="text-center">
+    {#    {% for item in data %}#}
+    {#        {% if not request.user.is_authenticated and not user == item.user %}#}
+            {% if not request.user.is_authenticated %}
+    {#            {% for prod in my_objects %}{% if prod.product_name == page.product_name %}{% endif %}{% endfor %}#}
+                <a class="w-full my-5 text-white text-center" href="/accounts/login/">Login or SignUp to purchase</a>
+            {% endif %}
+    {#    {% endfor %}#}
+            </div>
+    {#{% if current_user == False or prod_obj.product_id == page.id and prod_obj.is_owner == False %}#}
+    {#{% if current_user == False or prod_obj.is_owner == not True %}#}
+        <button type="submit" class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">Buy Now</button>
+    {#        {% endif %}#}
+    </form>
+
+
+    {% endif %}
+
+
+                    </div>
+
+                    <div>
+
+                    </div>
+                {% image self.product.product_image fill-600x600 as product_image %}
+                {% if product_image %}
+                    <div class="grid gap-4 p-4 md:text-center">
+                        <div>
+                            <img class="h-auto max-w-full rounded-lg mx-auto" src="{{ product_image.url }}"
+                                 alt="{{ product_image.alt }}">
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}

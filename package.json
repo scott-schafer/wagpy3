@@ -1,0 +1,20 @@
+{
+  "name": "wagpy3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "pip-compile ./requirements/requirements.in -o ./requirements.txt && pip install -r ./requirements.txt",
+    "watch": "npx @tailwindcss/cli -i ./core/tailwindcss/input.css -o ./core/static/css/styles.css --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^4.1.4"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.4",
+    "flowbite": "^3.1.2"
+  }
+}
