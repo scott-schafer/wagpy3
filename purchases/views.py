@@ -71,6 +71,11 @@ def purchase_start_view(request):
     # purchase = Purchase.objects.create(user=request.user, product=obj)
     # purchase = Purchase.objects.create(user=request.user, product_name=product_name, product_id=product_id)
 
+    # now = datetime.datetime.now()
+    # purchase_date = now.strftime("%b %d, %Y")
+    # formatted_now = now.strftime("%Y-%m-%d")
+    # invoice_number = f"{formatted_now}-{purchase_id}"
+
     purchase = Purchase.objects.create(user=request.user, product_name=product_name, product_id=product_id, stripe_price=stripe_price)
     purchase_id = request.session['purchase_id'] = purchase.id
     purchase.purchase_id = purchase.id
@@ -80,6 +85,11 @@ def purchase_start_view(request):
     purchase_date = now.strftime("%b %d, %Y")
     formatted_now = now.strftime("%Y-%m-%d")
     invoice_number = f"{formatted_now}-{purchase_id}"
+
+    purchase.purchase_invoice = request.session['purchase_invoice'] = invoice_number
+    purchase.save()
+
+
 
     success_path = reverse("purchases:success")
     if not success_path.startswith("/"):
@@ -127,6 +137,8 @@ def purchase_start_view(request):
 def purchase_success_view(request):
     purchase_id = request.session.get('purchase_id')
     checkout_id = request.session.get('checkout_id')
+    purchase_invoice = request.session.get('purchase_invoice')
+    print(purchase_invoice, 'success_view')
     session = stripe.checkout.Session.retrieve(
         checkout_id
     )
