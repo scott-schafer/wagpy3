@@ -1,8 +1,7 @@
-./node_modules/
-./requirements/
-.env
-./env
+node_modules/
+env/
 Dockerfile
 .dockerignore
-#/media
+.env
 .idea
+README.md
