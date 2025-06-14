@@ -16,16 +16,14 @@ class Purchase(models.Model):
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, default=1)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, default=1)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    product_name = models.CharField(max_length=120, null=True)
+    product_name = models.CharField(max_length=120, null=True, help_text="This Name must match the product name Exactly!")
     purchase_id = models.CharField(max_length=120, null=True)
     purchase_invoice = models.CharField(max_length=120, null=True)
     stripe_checkout_session_id = models.CharField(max_length=220, null=True, blank=True)
     # handle = models.SlugField(unique=True, null=True)
     complete = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
-
     stripe_price = models.IntegerField(default=0)
-    # timestamp = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateField(default=date.today)
 
     def __str__(self):

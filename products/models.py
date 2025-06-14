@@ -62,8 +62,8 @@ class Product(Page):
         related_name="+",
         on_delete=models.SET_NULL)
     stripe_product_id = models.CharField(max_length=220, null=True, blank=True)
-    product_name = models.CharField(max_length=120)
-    handle = models.SlugField(unique=True)
+    product_name = models.CharField(max_length=120, help_text="The Purchase Product Name must match this name Exactly!")
+    # handle = models.SlugField(unique=True)
     price = models.DecimalField(decimal_places=2, max_digits=10, default=9.99)
     og_price = models.DecimalField(decimal_places=2, max_digits=10, default=9.99)
     price_changed_timestamp = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
@@ -123,7 +123,7 @@ class Product(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("product_name"),
-        FieldPanel("handle"),
+        # FieldPanel("handle"),
         FieldPanel("is_owner"),
         FieldPanel("price"),
         FieldPanel("og_price"),
