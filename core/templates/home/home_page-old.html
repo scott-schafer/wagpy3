@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+
+{#{% block body_class %}Homepage{% endblock %}#}
+
+
+{% block banner %}
+
+
+{#<h1>Hello from  Banner block</h1>#}
+{#   <h1 class="text-zinc-900">{{ page.title }}</h1>#}
+{#    {% for hero in self.hero_carousel.all %}#}
+{#    {{ hero }}#}
+{#        <br />#}
+{#        {{ hero.slider_title }}#}
+{#        {{ hero.slider_sub_title }}#}
+{#        <br />#}
+{#    {% endfor %}#}
+
+
+ <!--HTML CODE-->
+<div class="w-full relative">
+<div class="swiper default-carousel swiper-container">
+{#<swiper :options="swiperOption"  @slideChange="changeSwiperIndex" ref="mySwiper">#}
+<div class="swiper-wrapper">
+       {% for hero in self.hero_carousel.all %}
+ <div class="swiper-slide">
+   <div class="bg-indigo-50 rounded-2xl h-96 flex justify-center items-center">
+     <div class="text-3xl font-semibold text-indigo-600">
+{#         {% if forloop.counter >= 0 %}#}
+        <h2 class="animate__animated animate__fadeInDown">{{ hero.slider_title }}</h2>
+        <h3 class="animate__animated animate__fadeInUp">{{ hero.slider_sub_title }}</h3>
+{#         {% endif %}#}
+     </div>
+   </div>
+ </div>
+    {% endfor %}
+{#           </div>#}
+
+
+<div class="swiper-pagination"></div>
+</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+    var swiper = new Swiper(".default-carousel", {
+      init: true,
+      parallax: true,
+      fadeEffect: { crossFade: true },
+      virtualTranslate: true,
+      slidesPerView: 'auto',
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        },
+      autoplay: {
+          delay: 2500,
+          pauseOnMouseEnter: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+        },
+      speed: 1000,
+      slidersPerView: 1,
+      effect: "fade",
+      injectStyles: "animate__animated",
+      on: {
+        slideChangeTransitionEnd: function () {
+          // Get the index of the newly active slide
+          const activeSlideIndex = this.realIndex;
+
+          // Apply/update styles based on the active slide
+          // For example, you could add a class to the active slide:
+          const activeSlide = this.slides[activeSlideIndex];
+          activeSlide.classList.add('animate__animated');
+
+          // Remove the class from previously active slides (if needed)
+          this.slides.forEach((slide, index) => {
+            if (index !== activeSlideIndex) {
+              slide.classList.remove('animate__animated');
+            }
+          });
+        }
+      }
+
+
+    });
+    swiper.init();
+
+    </script>
+
+{#    <script>#}
+{#    const swiper = document.querySelector('.swiper').swiper;#}
+{##}
+{#    // Now you can use all slider methods like#}
+{#    swiper.slideNext();#}
+{##}
+{#    </script>#}
+
+
+<!--JAVASCRIPT CODE-->
+{#<script>#}
+{#    var swiper = new Swiper(".default-carousel", {#}
+{#    loop: true,#}
+{#    pagination: {#}
+{#    el: ".swiper-pagination",#}
+{#    clickable: true,#}
+{#    },#}
+{#    navigation: {#}
+{#    nextEl: ".swiper-button-next",#}
+{#    prevEl: ".swiper-button-prev",#}
+{#    },#}
+{#    });#}
+{#</script>#}
+
+
+
+
+
+
+
+{#<div id="default-carousel" class="relative w-full" data-carousel="slide">#}
+{#    <!-- Carousel wrapper -->#}
+{#    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">#}
+{#         <!-- Item 1 -->#}
+{#    <div class="flex justify-center">#}
+{#        {% for hero in self.hero_carousel.all %}#}
+{#        <div class="hidden flex items-center flex-col duration-1700 ease-in-out" data-carousel-item>#}
+{#            <h2 class="animate__animated animate__fadeInDown">{{ hero.slider_title }}</h2>#}
+{#            <h3 class="animate__animated animate__fadeInUp">{{ hero.slider_sub_title }}</h3>#}
+{#        </div>#}
+{#    </div>#}
+{#        {% endfor %}#}
+{##}
+{#    </div>#}
+
+{#<section id="hero">#}
+{#    <div class="swiper">#}
+{#      <div class="swiper-wrapper mySwiper" data-carousel="slide">#}
+{#          {% for hero in self.hero_carousel.all %}#}
+{#        <div class="swiper-slide">#}
+{#          <div class="swiper-slide-content">#}
+{#            <div class="swiper-slide-text">#}
+{#             <h2 class="animate__animated animate__fadeInDown">{{ hero.slider_title }}</h2>#}
+{#            </div>#}
+{#            <div class="swiper-slide-text">#}
+{#              <h3 class="animate__animated animate__fadeInUp">{{ hero.slider_sub_title }}</h3>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#          {% endfor %}#}
+{##}
+{#      </div>#}
+{##}
+{#      <div class="swiper-pagination"></div>#}
+{#    </div>#}
+{#</section>#}
+{##}
+{#    <script>#}
+{#        const swiper = new Swiper('.swiper', {#}
+{#          speed: 400,#}
+{#          spaceBetween: 100,#}
+{#        });#}
+{##}
+{#    </script>#}
+
+
+
+{#<div class="carousel-inner text-red-500">#}
+{#            {% for hero in self.hero_carousel.all %}#}
+{#            {% for hero in page.hero_carousel.all %}#}
+{#                {{ hero }}#}
+{##}
+{#              <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" data-bs-interval="">#}
+{#                <div class="carousel-container">#}
+{#                  <h2 class="animate__animated animate__fadeInDown text-red-500">{{ hero.slider_title }}</h2>#}
+{#                  <h3 class="animate__animated animate__fadeInUp">{{ hero.slider_sub_title }}</h3>#}
+{#                </div>#}
+{#              </div>#}
+{#            {% endfor %}#}
+{#         </div>#}
+
+{% endblock banner %}
+
+
+
+
+
+
+
+
+{% block content %}
+{#<section id="hero" class="d-flex flex-column justify-content-end align-items-center">#}
+{#     <div id="carouselSlide" class="carousel carousel-fade" data-bs-interval="4000" data-bs-ride="carousel">#}
+{#       <ul class="carousel-indicators">#}
+{#{% cache 25920000 banner_carousel %}#}
+{#         {% for hero in self.hero_carousel.all %}#}
+{#          <li data-bs-target="#carouselSlide" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.counter0 == 0 %}active{% endif %}" aria-current="true" aria-label="Slide {{ forloop.counter }}"></li>#}
+{#         {% endfor %}#}
+{#{% endcache %}#}
+{#       </ul>#}
+{#         <div class="carousel-inner">#}
+{#            {% for hero in self.hero_carousel.all %}#}
+{#              <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}" data-bs-interval="">#}
+{#                <div class="carousel-container">#}
+{#                  <h2 class="animate__animated animate__fadeInDown">{{ hero.slider_title }}</h2>#}
+{#                  <h3 class="animate__animated animate__fadeInUp">{{ hero.slider_sub_title }}</h3>#}
+{#                </div>#}
+{#              </div>#}
+{#            {% endfor %}#}
+{#         </div>#}
+{#       </div>#}
+{#</section>#}
+
+
+
+{% endblock content %}

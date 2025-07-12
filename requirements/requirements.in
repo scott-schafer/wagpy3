@@ -6,6 +6,9 @@ python-decouple
 django-allauth
 wagtail-modeladmin
 stripe
+django-storages
+boto3
+
 
 
 

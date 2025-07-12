@@ -2,11 +2,17 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default.css";
 @plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
+@source "../../node_modules/flowbite";
+
+@custom-variant dark (&:where(.dark, .dark *));
+/*@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));*/
 
 @theme {
   --font-signika: "Signika", sans-serif;
+  --color-primary: oklch(58.6% 0.253 17.585);
 }
+
+
 
 
 
