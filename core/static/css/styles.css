@@ -131,12 +131,10 @@
     --color-gray-700: #374151;
     --color-gray-800: #1F2937;
     --color-gray-900: #111827;
-    --color-gray-950: oklch(13% 0.028 261.692);
     --color-zinc-200: oklch(92% 0.004 286.32);
     --color-zinc-800: oklch(27.4% 0.006 286.033);
     --color-zinc-900: oklch(21% 0.006 285.885);
     --color-stone-300: oklch(86.9% 0.005 56.366);
-    --color-black: #000000;
     --color-white: #ffffff;
     --spacing: 0.25rem;
     --breakpoint-sm: 40rem;
@@ -151,7 +149,6 @@
     --container-xl: 36rem;
     --container-2xl: 42rem;
     --container-4xl: 56rem;
-    --container-6xl: 72rem;
     --container-7xl: 80rem;
     --text-xs: 0.75rem;
     --text-xs--line-height: calc(1 / 0.75);
@@ -1019,14 +1016,8 @@
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
-  .right-6 {
-    right: calc(var(--spacing) * 6);
-  }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
-  }
-  .bottom-4 {
-    bottom: calc(var(--spacing) * 4);
   }
   .bottom-5 {
     bottom: calc(var(--spacing) * 5);
@@ -1037,12 +1028,8 @@
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
-<<<<<<< Updated upstream
   .left-1\/2 {
     left: calc(1/2 * 100%);
-  }
-  .left-6 {
-    left: calc(var(--spacing) * 6);
   }
   .left-\[calc\(50\%\+3rem\)\] {
     left: calc(50% + 3rem);
@@ -1068,8 +1055,6 @@
   .-z-20 {
     z-index: calc(20 * -1);
   }
-=======
->>>>>>> Stashed changes
   .z-10 {
     z-index: 10;
   }
@@ -1082,7 +1067,6 @@
   .z-40 {
     z-index: 40;
   }
-<<<<<<< Updated upstream
   .z-50 {
     z-index: 50;
   }
@@ -1104,8 +1088,6 @@
       max-width: 96rem;
     }
   }
-=======
->>>>>>> Stashed changes
   .mx-auto {
     margin-inline: auto;
   }
@@ -1544,7 +1526,6 @@
   .ml-3 {
     margin-left: calc(var(--spacing) * 3);
   }
-<<<<<<< Updated upstream
   .ml-6 {
     margin-left: calc(var(--spacing) * 6);
   }
@@ -1568,11 +1549,6 @@
   .contents {
     display: contents;
   }
-=======
-  .block {
-    display: block;
-  }
->>>>>>> Stashed changes
   .flex {
     display: flex;
   }
@@ -1582,13 +1558,18 @@
   .hidden {
     display: none;
   }
+  .inline {
+    display: inline;
+  }
+  .inline-block {
+    display: inline-block;
+  }
   .inline-flex {
     display: inline-flex;
   }
   .table {
     display: table;
   }
-<<<<<<< Updated upstream
   .aspect-1155\/678 {
     aspect-ratio: 1155/678;
   }
@@ -1603,8 +1584,6 @@
   .h-3 {
     height: calc(var(--spacing) * 3);
   }
-=======
->>>>>>> Stashed changes
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
@@ -1647,15 +1626,11 @@
   .h-auto {
     height: auto;
   }
-<<<<<<< Updated upstream
   .h-full {
     height: 100%;
   }
   .max-h-full {
     max-height: 100%;
-  }
-  .min-h-screen {
-    min-height: 100vh;
   }
   .datatable-table {
     .datatable-wrapper & {
@@ -1749,8 +1724,6 @@
   .w-3 {
     width: calc(var(--spacing) * 3);
   }
-=======
->>>>>>> Stashed changes
   .w-4 {
     width: calc(var(--spacing) * 4);
   }
@@ -1817,7 +1790,6 @@
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
   }
-<<<<<<< Updated upstream
   .max-w-xl {
     max-width: var(--container-xl);
   }
@@ -1914,8 +1886,6 @@
     --tw-translate-x: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
-=======
->>>>>>> Stashed changes
   .-translate-x-full {
     --tw-translate-x: -100%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -1944,7 +1914,6 @@
     --tw-translate-y: 100%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
-<<<<<<< Updated upstream
   .\!rotate-180 {
     rotate: 180deg !important;
   }
@@ -1957,8 +1926,6 @@
   .rotate-90 {
     rotate: 90deg;
   }
-=======
->>>>>>> Stashed changes
   .rotate-180 {
     rotate: 180deg;
   }
@@ -2212,14 +2179,9 @@
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
   }
-<<<<<<< Updated upstream
   .border-b-1 {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
-  }
-  .border-l {
-    border-left-style: var(--tw-border-style);
-    border-left-width: 1px;
   }
   .border-none {
     --tw-border-style: none;
@@ -2364,8 +2326,6 @@
   .border-\(--color-primary\) {
     border-color: var(--color-primary);
   }
-=======
->>>>>>> Stashed changes
   .border-blue-600 {
     border-color: var(--color-blue-600);
   }
@@ -2383,10 +2343,6 @@
   }
   .border-gray-900 {
     border-color: var(--color-gray-900);
-  }
-<<<<<<< Updated upstream
-  .border-slate-700 {
-    border-color: var(--color-slate-700);
   }
   .border-b-stone-300 {
     border-bottom-color: var(--color-stone-300);
@@ -2430,8 +2386,6 @@
   .bg-blue-700 {
     background-color: var(--color-blue-700);
   }
-=======
->>>>>>> Stashed changes
   .bg-gray-50 {
     background-color: var(--color-gray-50);
   }
@@ -2459,12 +2413,6 @@
   .bg-red-700 {
     background-color: var(--color-red-700);
   }
-  .bg-slate-50 {
-    background-color: var(--color-slate-50);
-  }
-  .bg-slate-800 {
-    background-color: var(--color-slate-800);
-  }
   .bg-transparent {
     background-color: transparent;
   }
@@ -2489,7 +2437,6 @@
       background-color: color-mix(in oklab, var(--color-white) 50%, transparent);
     }
   }
-<<<<<<< Updated upstream
   .dark {
     & .selectedCell {
       background-color: var(--color-gray-700);
@@ -2563,9 +2510,6 @@
       fill: color-mix(in oklab, var(--color-gray-800) 50%, transparent);
     }
   }
-  .fill-indigo-400 {
-    fill: var(--color-indigo-400);
-  }
   .fill-indigo-500 {
     fill: var(--color-indigo-500);
   }
@@ -2597,16 +2541,11 @@
   .p-1\.5 {
     padding: calc(var(--spacing) * 1.5);
   }
-=======
->>>>>>> Stashed changes
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
   .p-2\.5 {
     padding: calc(var(--spacing) * 2.5);
-  }
-  .p-3 {
-    padding: calc(var(--spacing) * 3);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
@@ -2622,9 +2561,6 @@
   }
   .p-\[30px\] {
     padding: 30px;
-  }
-  .px-1\.5 {
-    padding-inline: calc(var(--spacing) * 1.5);
   }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
@@ -2726,9 +2662,6 @@
   .pb-3 {
     padding-bottom: calc(var(--spacing) * 3);
   }
-  .pl-2 {
-    padding-left: calc(var(--spacing) * 2);
-  }
   .pl-3 {
     padding-left: calc(var(--spacing) * 3);
   }
@@ -2743,12 +2676,9 @@
   .text-left {
     text-align: left;
   }
-<<<<<<< Updated upstream
   .font-cinzel {
     font-family: var(--font-cinzel);
   }
-=======
->>>>>>> Stashed changes
   .text-2xl {
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
@@ -2898,15 +2828,12 @@
     --tw-tracking: var(--tracking-tight);
     letter-spacing: var(--tracking-tight);
   }
-<<<<<<< Updated upstream
   .text-balance {
     text-wrap: balance;
   }
   .text-pretty {
     text-wrap: pretty;
   }
-=======
->>>>>>> Stashed changes
   .whitespace-nowrap {
     white-space: nowrap;
   }
@@ -2979,31 +2906,18 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
-  .text-indigo-500 {
-    color: var(--color-indigo-500);
-  }
   .text-indigo-600 {
     color: var(--color-indigo-600);
   }
   .text-red-500 {
     color: var(--color-red-500);
   }
-  .text-slate-300 {
-    color: var(--color-slate-300);
-  }
-  .text-slate-500 {
-    color: var(--color-slate-500);
-  }
   .text-slate-600 {
     color: var(--color-slate-600);
-  }
-  .text-slate-900 {
-    color: var(--color-slate-900);
   }
   .text-white {
     color: var(--color-white);
   }
-<<<<<<< Updated upstream
   .text-zinc-800 {
     color: var(--color-zinc-800);
   }
@@ -3013,14 +2927,6 @@
   .uppercase {
     text-transform: uppercase;
   }
-  .italic {
-    font-style: italic;
-  }
-=======
-  .uppercase {
-    text-transform: uppercase;
-  }
->>>>>>> Stashed changes
   .antialiased {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -3061,7 +2967,6 @@
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
-<<<<<<< Updated upstream
   .shadow-sm {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -3097,19 +3002,14 @@
       outline-color: color-mix(in oklab, var(--color-white) 10%, transparent);
     }
   }
-=======
->>>>>>> Stashed changes
   .blur {
     --tw-blur: blur(8px);
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
-<<<<<<< Updated upstream
   .blur-3xl {
     --tw-blur: blur(var(--blur-3xl));
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
-=======
->>>>>>> Stashed changes
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
@@ -3133,7 +3033,6 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
-<<<<<<< Updated upstream
   .duration-200 {
     --tw-duration: 200ms;
     transition-duration: 200ms;
@@ -3158,8 +3057,6 @@
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
-=======
->>>>>>> Stashed changes
   .ease-out {
     --tw-ease: var(--ease-out);
     transition-timing-function: var(--ease-out);
@@ -3344,13 +3241,6 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-gray-900);
-      }
-    }
-  }
-  .hover\:text-slate-400 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-slate-400);
       }
     }
   }
@@ -3603,31 +3493,6 @@
       inset: calc(var(--spacing) * 0);
     }
   }
-  .md\:right-12 {
-    @media (width >= 48rem) {
-      right: calc(var(--spacing) * 12);
-    }
-  }
-  .md\:right-auto {
-    @media (width >= 48rem) {
-      right: auto;
-    }
-  }
-  .md\:bottom-6 {
-    @media (width >= 48rem) {
-      bottom: calc(var(--spacing) * 6);
-    }
-  }
-  .md\:bottom-8 {
-    @media (width >= 48rem) {
-      bottom: calc(var(--spacing) * 8);
-    }
-  }
-  .md\:left-12 {
-    @media (width >= 48rem) {
-      left: calc(var(--spacing) * 12);
-    }
-  }
   .md\:mt-0 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing) * 0);
@@ -3678,11 +3543,6 @@
       width: calc(var(--spacing) * 64);
     }
   }
-  .md\:w-auto {
-    @media (width >= 48rem) {
-      width: auto;
-    }
-  }
   .md\:grid-cols-2 {
     @media (width >= 48rem) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3725,19 +3585,9 @@
       }
     }
   }
-  .md\:rounded {
-    @media (width >= 48rem) {
-      border-radius: 0.25rem;
-    }
-  }
   .md\:p-8 {
     @media (width >= 48rem) {
       padding: calc(var(--spacing) * 8);
-    }
-  }
-  .md\:px-6 {
-    @media (width >= 48rem) {
-      padding-inline: calc(var(--spacing) * 6);
     }
   }
   .md\:py-16 {
@@ -5072,6 +4922,11 @@ h1 {
   inherits: false;
   initial-value: 0 0 #0000;
 }
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @property --tw-blur {
   syntax: "*";
   inherits: false;
@@ -5184,6 +5039,7 @@ h1 {
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-outline-style: solid;
       --tw-blur: initial;
       --tw-brightness: initial;
       --tw-contrast: initial;
