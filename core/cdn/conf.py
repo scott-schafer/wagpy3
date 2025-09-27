@@ -1,0 +1,22 @@
+from decouple import config
+import os
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
+AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL')
+AWS_LOCATION = config('AWS_LOCATION')
+# AWS_S3_SIGNATURE_VERSION = 's3v4',
+# AWS_QUERYSTRING_EXPIRE = 86400
+# AWS_QUERYSTRING_EXPIRE = 300
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "public",
+}
+# AWS_DEFAULT_ACL = "public-read"
+DEFAULT_FILE_STORAGE = "core.cdn.backends.MediaRootS3Boto3Storage"
+STATICFILES_STORAGE = "core.cdn.backends.StaticRootS3Boto3Storage"
+
+
+

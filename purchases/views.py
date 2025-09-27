@@ -23,8 +23,6 @@ import os
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default=None)
 stripe.api_key = STRIPE_SECRET_KEY
 
-
-# STRIPE_ENDPOINT_SECRET = 'whsec_bb33398794bcd6609c130bcd103175f1b9ff5c55f6824e77bcfeb0af295c4c2d'
 STRIPE_ENDPOINT_SECRET = config('STRIPE_ENDPOINT_SECRET', default=None)
 endpoint_secret = STRIPE_ENDPOINT_SECRET
 

@@ -118,6 +118,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -177,20 +179,52 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
-# Default storage settings, with the staticfiles storage updated.
-# See https://docs.djangoproject.com/en/5.2/ref/settings/#std-setting-STORAGES
+from core.cdn.conf import (
+    AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY,
+    AWS_STORAGE_BUCKET_NAME,
+    AWS_S3_REGION_NAME,
+    AWS_S3_ENDPOINT_URL,
+    AWS_LOCATION,
+    # AWS_QUERYSTRING_EXPIRE,
+    AWS_QUERYSTRING_AUTH,
+    AWS_S3_OBJECT_PARAMETERS,
+    DEFAULT_FILE_STORAGE,
+    STATICFILES_STORAGE,
+
+)
+
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "core.cdn.backends.MediaRootS3Boto3Storage",
     },
-    # ManifestStaticFilesStorage is recommended in production, to prevent
-    # outdated JavaScript / CSS assets being served from cache
-    # (e.g. after a Wagtail upgrade).
-    # See https://docs.djangoproject.com/en/5.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
     "staticfiles": {
+        # "BACKEND": "core.cdn.backends.StaticRootS3Boto3Storage",
         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
     },
+    "document": {
+            "BACKEND": "core.cdn.backends.DocumentRootS3Boto3Storage",
+        },
 }
+
+
+
+
+
+# Default storage settings, with the staticfiles storage updated.
+# See https://docs.djangoproject.com/en/5.2/ref/settings/#std-setting-STORAGES
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "django.core.files.storage.FileSystemStorage",
+#     },
+#     # ManifestStaticFilesStorage is recommended in production, to prevent
+#     # outdated JavaScript / CSS assets being served from cache
+#     # (e.g. after a Wagtail upgrade).
+#     # See https://docs.djangoproject.com/en/5.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
+#     "staticfiles": {
+#         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+#     },
+# }
 
 # Django sets a maximum of 1000 fields per form by default, but particularly complex page models
 # can exceed this limit within Wagtail's page editor.
@@ -224,6 +258,7 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip', 'png', 'jpg']
 
 WAGTAILDOCS_DOCUMENT_MODEL = 'products.CustomDocument'
+WAGTAILDOCS_SERVE_METHOD = 'redirect'
 
 
 
