@@ -27,6 +27,10 @@
 
 
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href={% static 'favicon/favicon-32x32.png' %}>
+        <link rel="icon" type="image/png" sizes="16x16" href={% static 'favicon/favicon-16x16.png' %}>
+        <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
@@ -39,11 +43,20 @@
             }
         </script>
 {#          <script src="https://kit.fontawesome.com/743902b33d.js" crossorigin="anonymous"></script>#}
+{#    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>#}
+{#    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>#}
+{#    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>#}
+        <script type="text/javascript"
+                defer
+                src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js "></script>
+
+
     </head>
 
 
     {% include "includes/main_nav.html" %}
-    <main class="bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+{#    <main class="bg-gray-200 text-gray-900 dark:bg-gray-900 dark:text-gray-200">#}
+    <main class="bg-(--bg-light) text-(--text-light) dark:bg-(--bg-dark) dark:text-(--text-dark)">
         {% block content %}{% endblock %}
     </main>
 
@@ -57,6 +70,8 @@
 {#    <script src="https://kit.fontawesome.com/743902b33d.js" crossorigin="anonymous"></script>#}
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+{#    <script type="text/javascript" defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js "></script>#}
     <script type="text/javascript" src="{% static 'htmx/htmx.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
