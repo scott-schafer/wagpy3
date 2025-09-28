@@ -107,16 +107,30 @@ ACCOUNT_SIGNUP_FIELDS = ['username', 'email*', 'password1*', 'password2']
 
 WSGI_APPLICATION = "core.wsgi.application"
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME'),
+#         'USER': config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'PORT': config('DB_PORT'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'ENGINE': config("DO_ENGINE"),
+        'NAME': config('DO_DATABASE'),
+        'USER': config('DO_USER'),
+        'PASSWORD': config('DO_PASSWORD'),
+        'HOST': config('DO_HOST'),
+        'PORT': config('DO_PORT'),
+        'SSLMODE': config('DO_SSLMODE'),
     }
 }
+
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 

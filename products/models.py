@@ -1,6 +1,4 @@
 from django.db import models
-# from django.http import HttpResponseRedirect, HttpResponseBadRequest
-# from django.shortcuts import render, redirect, get_object_or_404
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
@@ -18,10 +16,6 @@ from django.urls import reverse
 
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default=None)
 stripe.api_key = STRIPE_SECRET_KEY
-#
-# PROTECTED_MEDIA_ROOT = settings.PROTECTED_MEDIA_ROOT
-# protected_storage = FileSystemStorage(location=str(PROTECTED_MEDIA_ROOT))
-
 
 class ProductListingPage(Page):
 
@@ -76,7 +70,6 @@ class Product(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        # context["my_purchases"] = MyPurchases.objects.all()
         return context
 
     def __str__(self):
@@ -115,8 +108,6 @@ class Product(Page):
         super().save(*args, **kwargs)
 
 
-
-
     content_panels = Page.content_panels + [
         FieldPanel("product_name"),
         FieldPanel("is_owner"),
@@ -149,27 +140,3 @@ class CustomDocument(AbstractDocument):
         'is_free',
         'is_active',
     )
-
-
-# class DocumentCollection(Page):
-#     collection = models.ForeignKey(
-#         "wagtailcore.Collection",
-#         null=True,
-#         blank=True,
-#         on_delete=models.SET_NULL,
-#         related_name='+',
-#         verbose_name='Document Collection',
-#     )
-#     is_owner = models.BooleanField(default=False)
-#     is_free = models.BooleanField(default=False)
-#     is_active = models.BooleanField(default=False)
-#
-#     content_panels = Page.content_panels + [
-#         FieldPanel("collection"),
-#     ]
-#
-#     def get_context(self, request):
-#         context = super().get_context(request)
-#         documents = get_document_model().objects.filter(collection=self.collection)
-#         context['documents'] = documents
-#         return context
