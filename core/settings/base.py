@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "products",
     "purchases",
     "search",
+    "blog",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",

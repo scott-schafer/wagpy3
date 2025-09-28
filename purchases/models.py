@@ -32,12 +32,6 @@ class Purchase(models.Model):
     def get_context(self, request, *args, **kwargs):
         """Adding products information to page"""
         context = super().get_context(request, *args, **kwargs)
-        # context["product_model"] = Product.objects.all()
-        # context["features_page"] = FeaturesPage.objects.live().public()
-        # context["services_page"] = ServicesPage.objects.live().public()
-        # context["products_page"] = ProductsPage.objects.live().public()
-        # context["testimonials"] = Testimonial.objects.all()
-        # context["faq_page"] = FaqPage.objects.live().public()
         return context
 
 
@@ -51,13 +45,12 @@ class Meta:
 
 class MyPurchases(Page):
     template = "purchases/my_purchases.html"
-    # template = "products/product.html"
+
+    parent_page_types = ['home.HomePage']
 
     def get_context(self, request, *args, **kwargs):
         """Provide additional context information."""
         context = super().get_context(request)
-        # my_objects = Purchase.objects.all()
-        # my_objects = Purchase.objects.all()
         my_objects = Purchase.objects.filter(user=request.user.id)
         context['my_objects'] = my_objects
         return context

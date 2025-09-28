@@ -37,6 +37,30 @@ h1 {
     /*color: var(--color-light-primary);*/
 }
 
+.richtext {
+    font-size: 18px;
+}
+
+.richtext p {
+    padding: 20px;
+    color: blue;
+}
+
+.richtext h1 {
+    color: white;
+}
+
+.richtext img {
+
+    padding: 10px;
+    border: 5px solid green;
+    background: white;
+}
+
+.richtext code {
+    color: orange;
+}
+
 
 
 

@@ -20,19 +20,11 @@ from django.conf import settings
 
 import os
 
-STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default=None)
-stripe.api_key = STRIPE_SECRET_KEY
 
-STRIPE_ENDPOINT_SECRET = config('STRIPE_ENDPOINT_SECRET', default=None)
-endpoint_secret = STRIPE_ENDPOINT_SECRET
+stripe.api_key = config('STRIPE_SECRET_KEY', default=None)
+endpoint_secret = config('STRIPE_ENDPOINT_SECRET', default=None)
 
-BASE_ENDPOINT = 'http://127.0.0.1:8000'
-
-MY_GLOBAL_VAR = 0
-
-def change_global_var(new_value):
-    global MY_GLOBAL_VAR
-    MY_GLOBAL_VAR = new_value
+BASE_ENDPOINT = config('BASE_ENDPOINT', default=None) # used for Stripe success path and cancel path below.
 
 @csrf_exempt
 def purchase_start_view(request):
@@ -41,18 +33,10 @@ def purchase_start_view(request):
     if not request.user.is_authenticated:
         return HttpResponseBadRequest("Needs to be User")
 
-
-
     product_name = request.POST.get("product_name")
     product_id = request.POST.get("product_id")
     stripe_price = request.POST.get("stripe_price")
     product_url = request.POST.get("product_url")
-
-
-    # purchase = Purchase.objects.create(user=request.user, product_name=product_name, product_id=product_id, stripe_price=stripe_price)
-    # request.session['purchase_id'] = purchase.id
-
-
 
     stripe_product_obj = stripe.Product.create(name=product_name)
     stripe_product_id = stripe_product_obj.id
@@ -66,13 +50,6 @@ def purchase_start_view(request):
 
     if stripe_price_id is None:
         return HttpResponseBadRequest("Stripe Processing Has Failed")
-    # purchase = Purchase.objects.create(user=request.user, product=obj)
-    # purchase = Purchase.objects.create(user=request.user, product_name=product_name, product_id=product_id)
-
-    # now = datetime.datetime.now()
-    # purchase_date = now.strftime("%b %d, %Y")
-    # formatted_now = now.strftime("%Y-%m-%d")
-    # invoice_number = f"{formatted_now}-{purchase_id}"
 
     purchase = Purchase.objects.create(user=request.user, product_name=product_name, product_id=product_id, stripe_price=stripe_price)
     purchase_id = request.session['purchase_id'] = purchase.id
@@ -86,8 +63,6 @@ def purchase_start_view(request):
 
     purchase.purchase_invoice = request.session['purchase_invoice'] = invoice_number
     purchase.save()
-
-
 
     success_path = reverse("purchases:success")
     if not success_path.startswith("/"):
@@ -112,23 +87,9 @@ def purchase_start_view(request):
     purchase.stripe_checkout_session_id = checkout_session.id
     purchase.save()
 
-
-
-
-
-
-    # session = stripe.checkout.Session.modify(
-    #     checkout_session.id,
-    #     metadata={"purchase_id": purchase_id}
-    #     ),
-    # metadata = session.purchase_id.metadata
-    # print(metadata)
-    # print(session.created)
-
-    # return HttpResponseRedirect("/purchases/success")
     stripe_checkout_id = request.session['checkout_id'] = checkout_session.id
     request.session.save()
-    print(stripe_checkout_id, 'start_view')
+    # print(stripe_checkout_id, 'start_view')
     return HttpResponseRedirect(checkout_session.url)
 
 
@@ -140,17 +101,12 @@ def purchase_success_view(request):
     session = stripe.checkout.Session.retrieve(
         checkout_id
     )
-    # print(session)
-    # print(session.customer_details.name, 'success_view')
-    # customer_name = session.customer_details.name
-    print(purchase_id, 'success_view')
+    # print(purchase_id, 'success_view')
     if purchase_id:
         purchase = Purchase.objects.get(id=purchase_id)
         purchase.complete = True
         purchase.is_owner = True
         purchase.save()
-    # return HttpResponse(f"Finished {purchase_id}, {customer_name}")
-    # return HttpResponse("Purchase Is Complete!")
     return render(request, 'purchases/success.html', {'session': session})
 
 
@@ -161,7 +117,7 @@ def purchase_stopped_view(request):
         purchase = Purchase.objects.get(id=purchase_id)
         product = purchase.product
         del request.session['purchase_id']
-        return HttpResponseRedirect(product.get_absolute_url())
+        return HttpResponseRedirect(product.url)
     return HttpResponse("Stopped")
 
 def redirect_view(request):

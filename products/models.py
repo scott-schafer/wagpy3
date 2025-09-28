@@ -18,7 +18,9 @@ STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default=None)
 stripe.api_key = STRIPE_SECRET_KEY
 
 class ProductListingPage(Page):
-
+    parent_page_types = ['home.HomePage']
+    subpage_types = ['products.Product']
+    max_count = 1
     sub_title = models.CharField(max_length=255, blank=True, null=True, help_text="255 Characters max")
     sub_title_text = models.CharField(max_length=500, blank=True, null=True, help_text="500 Characters max")
 
@@ -40,6 +42,7 @@ class ProductListingPage(Page):
 
 
 class Product(Page):
+    parent_page_types = ['products.ProductListingPage']
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,

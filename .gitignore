@@ -6,6 +6,7 @@ Dockerfile
 .idea
 .pyc
 .log
+core/settings/dev.py
 
 README.md
 __pycache__
