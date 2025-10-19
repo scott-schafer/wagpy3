@@ -53,8 +53,8 @@ class CarouselBlock(blocks.StreamBlock):
 
 class CallToActionBlock(blocks.StructBlock):
     text = blocks.RichTextBlock(
-                features=['bold', 'italic'],
-                rquired=True
+        features=['bold', 'italic'],
+        required=True
     )
     page = blocks.PageChooserBlock()
     button_text = blocks.CharBlock(
@@ -79,7 +79,9 @@ class ImageBlock(ImageChooserBlock):
 class ArticleSectionBlock(blocks.StructBlock):
     """A block for a single section with a header and content."""
     header = blocks.CharBlock(required=True)
-    content = blocks.RichTextBlock(required=False)
+    content = blocks.RichTextBlock(
+        features=['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'document-link', 'image', 'ol', 'ul', 'blockquote', 'code'],
+        required=False)
 
     class Meta:
         template = 'blocks/article_section_block.html'

@@ -89,8 +89,7 @@ class BlogDetail(Page):
         ('call_to_action', app_blocks.CallToActionBlock()),
         ('carousel', app_blocks.CarouselBlock()),
         ('rich_text', RichTextBlock(
-            features=['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'document-link', 'image', 'ol', 'ul', 'blockquote',
-                      'code'],
+            features=['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'document-link', 'image', 'ol', 'ul', 'blockquote', 'code'],
             group='Coding'
         )),
         ],
