@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+
+<div id="{{ value.header|slugify }}">
+    <h2 class="section-header">{{ value.header }}</h2>
+    {{ value.content|richtext }}
+</div>

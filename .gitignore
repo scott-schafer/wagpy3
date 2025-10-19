@@ -1,4 +1,5 @@
 node_modules/
+anchor_menu/
 env/
 Dockerfile
 .dockerignore

@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
 from taggit.models import TaggedItemBase
@@ -76,6 +77,7 @@ class BlogDetail(Page):
     )
 
     body = StreamField([
+        ('article_section', app_blocks.ArticleSectionBlock()),
         ('divider', app_blocks.InfoBlock()),
         ('image', app_blocks.ImageBlock()),
         ('code', CodeBlock(label='Code', group='Coding')),
@@ -94,10 +96,23 @@ class BlogDetail(Page):
         ],
         use_json_field=True, blank=True, null=True)
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        # Create a list of tuples with (heading, anchor_id)
+        sections = []
+        for block in self.body:
+            if block.block_type == 'article_section':
+                # Get the value from the header field
+                heading_text = block.value.get('header')
+                # Slugify the heading to create a clean anchor ID
+                anchor_id = slugify(heading_text)
+                sections.append({
+                    'heading': heading_text,
+                    'anchor_id': anchor_id,
+                })
+        context['toc_sections'] = sections
+        return context
 
-    # body = RichTextField(
-    #  blank=True,
-    #  features=['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'document-link', 'image', 'ol', 'ul', 'blockquote', 'code', 'strikethrough'])
 
 
     content_panels = Page.content_panels + [

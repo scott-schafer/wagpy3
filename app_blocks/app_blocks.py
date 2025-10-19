@@ -74,3 +74,14 @@ class ImageBlock(ImageChooserBlock):
         group = 'Standalone Blocks'
         icon = 'image'
         template = 'blocks/image_block.html'
+
+
+class ArticleSectionBlock(blocks.StructBlock):
+    """A block for a single section with a header and content."""
+    header = blocks.CharBlock(required=True)
+    content = blocks.RichTextBlock(required=False)
+
+    class Meta:
+        template = 'blocks/article_section_block.html'
+        icon = 'title'
+
