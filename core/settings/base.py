@@ -7,8 +7,9 @@ import os
 
 SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)
-# DEBUG = True
+DEBUG = True
 ALLOWED_HOSTS = ["*"]
+
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,6 +22,7 @@ INSTALLED_APPS = [
     "purchases",
     "search",
     "blog",
+    "app_blocks",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -46,7 +48,8 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "allauth",
     "allauth.account",
-    "widget_tweaks"
+    "widget_tweaks",
+    "wagtailcodeblock",
 ]
 
 MIDDLEWARE = [
@@ -275,6 +278,22 @@ WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'tx
 WAGTAILDOCS_DOCUMENT_MODEL = 'products.CustomDocument'
 WAGTAILDOCS_SERVE_METHOD = 'redirect'
 
+WAGTAIL_CODE_BLOCK_LINE_NUMBERS = False
+WAGTAIL_CODE_BLOCK_THEME = 'tomorrow'
+# WAGTAIL_CODE_BLOCK_THEME = 'okaidia'
+WAGTAIL_CODE_BLOCK_COPY_TO_CLIPBOARD = True
+
+WAGTAIL_CODE_BLOCK_LANGUAGES = (
+    ('python', 'Python'),
+    ('css', 'CSS'),
+    ('html', 'HTML'),
+    ('javascript', 'Javascript'),
+    ('scss', 'SCSS'),
+    ('json', 'JSON'),
+    ('bash', 'Bash/Shell'),
+    ('diff', 'diff'),
+    ('yaml', 'YAML'),
+)
 
 
 

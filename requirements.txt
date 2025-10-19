@@ -123,3 +123,5 @@ willow[heif]==1.9.0
     # via
     #   wagtail
     #   willow
+
+wagtailcodeblock==1.29.0.2

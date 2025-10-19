@@ -4,15 +4,36 @@
 
 {% block content %}
 
-    Below is the Detail Page
 
-<h1>{{ page.title }}</h1>
-<h3>{{ page.subtitle }}</h3>
-<div class="richtext">
 
-{{ page.body|richtext }}
+<h1 class="text-4xl text-center mt-4">{{ page.title }}</h1>
+<h3 class="text-2xl text-center mt-1">{{ page.subtitle }}</h3>
+
+<div class="flex flex-row w-auto">
+{#<div class="container mx-auto sm:px-6 lg:px-8">#}
+
+<div class="basis-2/3 mt-10">
+<div class="richtext max-w-9/10">
+
+    {% for block in page.body %}
+        {% include_block block %}
+    {% endfor %}
 
 </div>
+</div>
+
+
+<div class="basis-1/3 bg-red-400 ml-2 mt-10 h-screen">
+    Column 3
+</div>
+
+</div>
+
+    <h3>Tags:</h3>
+    {% for tag in page.tags.all %}
+    <a href="/blog/?tag={{ tag.slug }}">{{ tag.name }}</a>
+{#        <a href="{{ tag.slug }}">{{ tag.name }}</a>#}
+    {% endfor %}
 
 
 {% endblock content %}

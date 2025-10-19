@@ -31,34 +31,93 @@
 /*header {*/
 /*    z-index: 999;*/
 /*}*/
+html {
+    scroll-behavior: smooth;
+}
 
 h1 {
     color: var(--color-primary);
     /*color: var(--color-light-primary);*/
 }
 
+pre {
+
+}
+
+
 .richtext {
-    font-size: 18px;
+    font-size: 1rem;
+    width: 70%;
+    max-width: 70%;
+    /*color: blue;*/
+    margin: auto;
+    /*padding: 20px 0;*/
+
 }
 
 .richtext p {
-    padding: 20px;
-    color: blue;
+    padding: 20px 0;
+    /*color: blue;*/
 }
 
-.richtext h1 {
-    color: white;
+.richtext h2 {
+    font-size: 2.5rem;
+    /*color: red;*/
+}
+
+.richtext h3 {
+    font-size: 1.75rem;
+    /*color: green;*/
+
 }
 
 .richtext img {
-
-    padding: 10px;
-    border: 5px solid green;
-    background: white;
+    padding: 20px 0;
+    /*padding: 10px;*/
+    /*border: 5px solid green;*/
+    /*background: white;*/
 }
 
 .richtext code {
-    color: orange;
+    /*color: orange;*/
+    font-family: 'Mono';
+    color: #e5e7eb;
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 5px;
+}
+
+/*.toolbar .toolbar-item .copy-to-clipboard-button {*/
+/*  !* Keep the copy button visible at all times *!*/
+/*     color: green;*/
+/*     opacity: 1 !important;*/
+/*     visibility: visible !important;*/
+/*}*/
+
+div.code-toolbar .toolbar {
+    /*max-width: 50px;*/
+    /*color: red;*/
+    /*background: red;*/
+    opacity: 1 !important;
+}
+
+.toolbar .toolbar-item {
+  /* Keep the copy button visible at all times */
+  /*  font-size: 1rem;*/
+    font-weight: bold;
+    color: #91273c;
+    /*margin: 3px 3px 6px 3px;*/
+
+    /*background: red;*/
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+/*.copy-to-clipboard-button:hover {*/
+/*    color: green;*/
+/*}*/
+
+aside {
+    scroll-behavior: smooth;
 }
 
 
