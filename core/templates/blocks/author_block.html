@@ -1,0 +1,8 @@
+{% load static %}
+
+
+{% for block in page.body %}
+        {% if block.block_type == 'author' %}
+        <h1>{{ block.value.full_name }}</h1>
+        {% endif %}
+    {% endfor %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+
+<h1 class="text-3xl text-center mt-[50px]">All Blog Posts</h1>
+
+
+<div class="py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+{#  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">#}
+    <div class="mx-auto flex max-w-2xl flex-col items-end justify-between gap-16 lg:mx-0 lg:max-w-none lg:flex-row">
+
+      <ul class="-my-8 divide-y divide-gray-800">
+        {% for post in posts %}
+          <li class="py-8">
+            <dl class="relative flex flex-wrap gap-x-3">
+                <dt class="sr-only">Title</dt>
+              <dd class="w-full flex-none text-lg font-semibold tracking-tight">
+                <a href="{{ post.url }}" class="hover:text-(--color-primary)">
+                  <h3>{{ post.title }}</h3>
+                  <span aria-hidden="true" class="absolute inset-0"></span>
+                </a>
+              </dd>
+              <dt class="sr-only">Description</dt>
+              <dd class="mt-2 w-full flex-none text-base/7 text-gray-400">{{ post.description }}</dd>
+            </dl>
+          </li>
+            {% endfor %}
+        </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}

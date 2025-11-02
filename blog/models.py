@@ -1,4 +1,5 @@
 from django.db import models
+from django.http import JsonResponse
 from django.template.defaultfilters import slugify
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
@@ -9,14 +10,15 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail import blocks
 
-from wagtail.models import Page
+from wagtail.models import Page, Orderable
+# from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.fields import StreamField
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.blocks import RichTextBlock
 from wagtailcodeblock.blocks import CodeBlock
 from app_blocks import app_blocks
-
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
 
 
 class BlogPageTags(TaggedItemBase):
@@ -27,7 +29,7 @@ class BlogPageTags(TaggedItemBase):
     )
 
 
-class BlogIndex(Page):
+class BlogIndex(RoutablePageMixin, Page):
     template = "blog/blog_index.html"
     max_count = 1
     parent_page_types = ['home.HomePage']
@@ -40,12 +42,52 @@ class BlogIndex(Page):
         FieldPanel('body'),
     ]
 
+    ##### All Blog Posts #####
+    @path('all/', name='all')
+    def all_blog_posts(self, request):
+        posts = BlogDetail.objects.live().public().order_by('-first_published_at')
+
+        return self.render(
+            request,
+            context_overrides={
+                'posts': posts,
+            },
+            template='blog/posts_all.html'
+        )
+
+    #### Tag Posts ####
+    @path('tag/<str:tag>/', name='tag')
+    def blog_post_tags(self, request, tag=None):
+        # posts = BlogDetail.objects.live().public().filter(tags__name=tag).order_by('-first_published_at')
+        posts = BlogDetail.objects.live().public().filter(tags__name=tag)
+
+        return self.render(
+            request,
+            context_overrides={
+                'posts': posts,
+                'tag': tag,
+            },
+            template='blog/posts_by_tag.html'
+        )
+
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['blog_pages'] = BlogDetail.objects.live().public().order_by('-first_published_at')
+        context['blog_pages'] = BlogDetail.objects.live().public().order_by('-first_published_at')[:6]
+        context["authors"] = BlogDetail.objects.all()
         # context['blog_pages'] = BlogDetail.objects.live().public().descendant_of(self)
         return context
+
+
+class BlogAuthorOrderable(Orderable):
+    page = ParentalKey('blog.BlogDetail', related_name='blog_authors')
+    author = models.ForeignKey("blog.Author", on_delete=models.CASCADE)
+
+    panels = [
+        FieldPanel("author"),
+    ]
+
+
 
 
 class Author(models.Model):
@@ -84,7 +126,7 @@ class BlogDetail(Page):
         ('text', app_blocks.TextBlock()),
         ('page', blocks.PageChooserBlock(required=False, group = 'Standalone Blocks')),
         ('doc', DocumentChooserBlock(group = 'Standalone Blocks')),
-        ('author', SnippetChooserBlock('blog.Author')),
+        # ('author', SnippetChooserBlock('blog.Author')),
         ('faq', app_blocks.FAQListBlock()),
         ('call_to_action', app_blocks.CallToActionBlock()),
         ('carousel', app_blocks.CarouselBlock()),
@@ -97,6 +139,7 @@ class BlogDetail(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        # context["authors"] = blog_authors.all()
         # Create a list of tuples with (heading, anchor_id)
         sections = []
         for block in self.body:
@@ -117,6 +160,12 @@ class BlogDetail(Page):
     content_panels = Page.content_panels + [
         FieldPanel('subtitle'),
         FieldPanel('description'),
+        MultiFieldPanel(
+            [
+                InlinePanel("blog_authors", label="Authors", min_num=1, max_num=2),
+            ],
+            heading='Authors',
+        ),
         FieldPanel('tags'),
         FieldPanel('image'),
         FieldPanel('body'),
