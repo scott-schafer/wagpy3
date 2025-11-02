@@ -107,7 +107,6 @@ class BlogDetail(Page):
     parent_page_types = ['blog.BlogIndex']
     subpage_types = []
 
-    subtitle = models.CharField(max_length=100, blank=True)
     description = models.CharField(max_length=210, blank=True, help_text='210 Characters, about 35 words.')
     tags = ClusterTaggableManager(through=BlogPageTags, blank=True)
     image = models.ForeignKey(
@@ -137,9 +136,9 @@ class BlogDetail(Page):
         ],
         use_json_field=True, blank=True, null=True)
 
+    #### Context Navigation Menu ####
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        # context["authors"] = blog_authors.all()
         # Create a list of tuples with (heading, anchor_id)
         sections = []
         for block in self.body:
@@ -158,7 +157,6 @@ class BlogDetail(Page):
 
 
     content_panels = Page.content_panels + [
-        FieldPanel('subtitle'),
         FieldPanel('description'),
         MultiFieldPanel(
             [
