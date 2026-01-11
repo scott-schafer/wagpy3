@@ -20,6 +20,7 @@ class FAQBlock(blocks.StructBlock):
         features=['bold', 'italic', 'link', 'document-link'],
     )
 
+
 class FAQListBlock(blocks.ListBlock):
     def __init__(self, **kwargs):
         super().__init__(FAQBlock(), **kwargs)
@@ -30,6 +31,7 @@ class FAQListBlock(blocks.ListBlock):
         template = 'blocks/faq_list_block.html'
         label = 'Frequently Asked Questions'
 
+
 class TextBlock(blocks.TextBlock):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, help_text="Just a block of text.")
@@ -38,6 +40,7 @@ class TextBlock(blocks.TextBlock):
         group = 'Standalone Blocks'
         icon = 'edit'
         template = 'blocks/text_block.html'
+
 
 class CarouselBlock(blocks.StreamBlock):
     image = ImageChooserBlock()
@@ -50,6 +53,7 @@ class CarouselBlock(blocks.StreamBlock):
         group = 'Iterable'
         icon = 'copy'
         template = 'blocks/carousel_block.html'
+
 
 class CallToActionBlock(blocks.StructBlock):
     text = blocks.RichTextBlock(
@@ -74,8 +78,8 @@ class CallToActionBlock(blocks.StructBlock):
         template = 'blocks/call_to_action_block.html'
         label = 'Call To Action Block'
 
-class ImageBlock(ImageChooserBlock):
 
+class ImageBlock(ImageChooserBlock):
     class Meta:
         group = 'Standalone Blocks'
         icon = 'image'
@@ -86,10 +90,10 @@ class ArticleSectionBlock(blocks.StructBlock):
     """A block for a single section with a header and content."""
     header = blocks.CharBlock(required=True)
     content = blocks.RichTextBlock(
-        features=['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'document-link', 'image', 'ol', 'ul', 'blockquote', 'code'],
+        features=['h2', 'h3', 'h4', 'bold', 'italic', 'link', 'document-link', 'image', 'ol', 'ul', 'blockquote',
+                  'code'],
         required=False)
 
     class Meta:
         template = 'blocks/article_section_block.html'
         icon = 'title'
-
