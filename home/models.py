@@ -11,7 +11,6 @@ class HomePage(Page):
 
     sub_title = models.CharField(max_length=255, blank=True, null=True)
 
-
     content_panels = Page.content_panels + [
         FieldPanel("sub_title"),
 
@@ -23,4 +22,3 @@ class HomePage(Page):
         # context['custom_data'] = 'This is a custom data'
 
         return context
-
