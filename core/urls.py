@@ -15,10 +15,11 @@ urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("accounts/", include("allauth.urls")),
-    path("", TemplateView.as_view(template_name="home/home_page.html")),
+    # path("", TemplateView.as_view(template_name="home/home_page.html")),
     path("purchases/", include("purchases.urls")),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
+    path("", include(wagtail_urls)),
 
 ]
 
