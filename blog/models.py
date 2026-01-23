@@ -94,7 +94,7 @@ class Author(models.Model):
     full_name = models.CharField(max_length=60)
     bio = models.TextField(max_length=500, blank=True)
 
-    content_panels = Page.content_panels + [
+    panels = Page.content_panels + [
         FieldPanel('full_name'),
         FieldPanel('bio'),
     ]

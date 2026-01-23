@@ -784,6 +784,48 @@
 
     </section>
 
+{#    {% for block in page.body %}#}
+{#    {% if block.block_type == 'newsletter_signup' %}#}
+{#        {{ block.value }}#}
+{#        <label for="{{ block.value.email_address }}" class="sr-only">Email address</label>#}
+{#        <input id="email-address" type="email" name="email" required placeholder="Enter your email"#}
+{#               autocomplete="email"#}
+{#        class="w-full rounded-md bg-white/5 dark:bg-(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)"/>#}
+{#    {% endif %}#}
+{#{% endfor %}#}
+
+{#    {% include 'home/stream_form_page.html' %}#}
+
+
+
+{#    {% for block in page.body %}#}
+{#    {% if block.block_type == 'newsletter_signup' %}#}
+{#        {% include_block block %}#}
+{#        {{ block.value.title }}#}
+{#        {{ block.value.email_address }}#}
+{#        {{ block.value.submit_button_text }}#}
+{#    {% endif %}#}
+{#{% endfor %}#}
+
+{#{% for block in page.body %}#}
+{#{% if block.block_type == 'newsletter_signup' %}#}
+{#            <p>Name: {{ block.value }}</p>#}
+{#        {% elif block.block_type == 'email' %}#}
+{#            <p>Email: {{ block.value }}</p>#}
+{#        {% elif block.block_type == 'message' %}#}
+{#            <p>Message: {{ block.value }}</p>#}
+{#        {% endif %}#}
+{#{% endfor %}#}
+
+
+{#    {% for block in page.body %}#}
+{#        {{ block.value }}#}
+{#    {% if block.block_type == 'newsletter_signup' %}#}
+{#        {{ block.value }}#}
+{#    {% endif %}#}
+{#    {% endfor %}#}
+
+
     {# Subscribe Newsletter Section #}
     <section class="relative isolate dark:bg-(--bg-primary)">
     <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 border-b-1 border-b-stone-300 dark:border-b-gray-900">
@@ -796,28 +838,32 @@
                             and an occasional blog post offering tips, tricks and tutorials. So if you like that kind of
                             thing be sure to sign up!</p>
                         <div class="mt-6 flex max-w-md gap-x-4">
-                            <label for="email-address" class="sr-only">Email address</label>
-                            <input id="email-address" type="email" name="email" required placeholder="Enter your email"
-                                   autocomplete="email"
-                            class="w-full rounded-md bg-white/5 dark:bg-(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)"/>
+{#                            <label for="email-address" class="sr-only">Email address</label>#}
+{#                            <input id="email-address" type="email" name="email" required placeholder="Enter your email"#}
+{#                                   autocomplete="email"#}
+{#                            class="w-full rounded-md bg-white/5 dark:bg-(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)"/>#}
 
 {#                            <input id="email-address" type="email" name="email" required placeholder="Enter your email"#}
 {#                                   autocomplete="email"#}
 {#                            class="w-full rounded-md bg-white/5 dark:bg-(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)"/>#}
-{#                            <form action="{% pageurl page %}" method="POST" role="form">#}
-{#                            {% csrf_token %}#}
-{#                            {% for field in form %}#}
-{#                                {% if field.label == "email_address" %}#}
-{#                                    {% render_field field class+="w-full rounded-md bg-white/5 dark:bg-(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)" placeholder=field.help_text|safe %}#}
-{#                                {% endif %}#}
+{#{{ my_form_data }}#}
+{#                            {% for item in my_form_data %}#}
+{#                        {{ item }}#}
 {#                        {% endfor %}#}
-{##}
-{##}
+
+                            <form action="{% pageurl page %}" method="POST" role="form">
+                            {% csrf_token %}
+
+                            {% for field in form %}
+                                {% if field.label == "mailing_list" %}
+                                    {% render_field field class+="w-2/3 rounded-md bg-white/5 dark:bg-(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)" placeholder=field.help_text|safe %}
+                                {% endif %}
+                        {% endfor %}
                             <button type="submit"
-                                    class="z-10 flex-none items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border-1 border-(--color-primary) rounded-lg hover:text-gray-200 focus:ring-4 focus:ring-gray-100 dark:text-white hover:bg-(--color-primary) dark:hover:bg-(--hover-dark) dark:focus:ring-gray-800">
+                                    class="z-10 flexx items-center justify--center justify-between ml-2 px-5 py-2 text-base font-medium text-center text-gray-900 border-1 border-(--color-primary) rounded-lg hover:text-gray-200 focus:ring-4 focus:ring-gray-100 dark:text-white hover:bg-(--color-primary) dark:hover:bg-(--hover-dark) dark:focus:ring-gray-800">
                                 Subscribe
                             </button>
-{#                            </form>#}
+                            </form>
 
                         </div>
                     </div>
@@ -1212,6 +1258,8 @@
                     {% endif %}
             {% endfor %}
         </div>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha mt-10" data-sitekey="6LfWXbsjAAAAACftWrYZpr3-fWJOBaRQ_XxkrsFQ" data-theme="dark"></div>
     <div class="mt-10">
             <button type="submit"
                     class="block w-2/4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold shadow-xs border-(--color-primary) border-1 hover:text-gray-200 focus:ring-4 focus:ring-gray-100 dark:text-white hover:bg-(--color-primary) dark:hover:bg-(--hover-dark) dark:focus:ring-gray-800">
@@ -1338,4 +1386,20 @@
 
     </section>
 
+{#{% for item in my_form_data %}#}
+{#    {{ item }}#}
+{#    {% endfor %}#}
+{##}
+{#{% for block in my_form_data %}#}
+{#    {% if block.block_type == 'form' %}#}
+{#        <div class="person">#}
+{#            <h2>{{ block.value }}</h2>#}
+{#            <p>{{ block.value }}</p>#}
+{#        </div>#}
+{#    {% endif %}#}
+{#{% endfor %}#}
+{##}
+{##}
 {% endblock content %}
+
+

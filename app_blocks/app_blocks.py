@@ -1,5 +1,16 @@
 from wagtail import blocks
+from wagtail_flexible_forms.models import AbstractSessionFormSubmission
+from wagtail_flexible_forms.models import AbstractSubmissionRevision
+
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.blocks import ImageBlock
+from wagtail_flexible_forms import blocks as wff_blocks
+from wagtail.contrib.forms.models import FormSubmission
+from wagtail_flexible_forms.models import StreamFormMixin
+
+from wagtail.contrib.forms.models import AbstractEmailForm
+# from wagtail.blocks import PageChooserBlock
+from wagtail.snippets.models import register_snippet
 from wagtail.blocks import RichTextBlock
 
 from app_blocks import app_blocks
@@ -97,3 +108,102 @@ class ArticleSectionBlock(blocks.StructBlock):
     class Meta:
         template = 'blocks/article_section_block.html'
         icon = 'title'
+
+
+class NewsletterSignupBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False, help_text="Title for the signup form")
+    email_address = blocks.EmailBlock(required=True, help_text="Your email address")
+    submit_button_text = blocks.CharBlock(default="Subscribe")
+
+    class Meta:
+        icon = "mail"
+        template = "blocks/newsletter_signup_block.html"
+
+
+class ContactInfoBlock(blocks.StructBlock):
+    """A block for contact details, including an email field."""
+    name = blocks.CharBlock(label="Your Name", required=True)
+    email = blocks.EmailBlock(label="Your Email Address", required=True, help_text="Enter a valid email address.")
+    message = blocks.TextBlock(label="Your Message", required=False)
+
+    class Meta:
+        icon = "mail"
+
+
+# STREAMFORM_FIELDS = [
+#     # Include form field blocks from wagtail_flexible_forms.
+#     ("sf_singleline", wff_blocks.CharFieldBlock(group="Fields")),
+#     ("sf_multiline", wff_blocks.TextFieldBlock(group="Fields")),
+#     ("sf_checkboxes", wff_blocks.CheckboxesFieldBlock(group="Fields")),
+#     ("sf_radios", wff_blocks.RadioButtonsFieldBlock(group="Fields")),
+#     ("sf_dropdown", wff_blocks.DropdownFieldBlock(group="Fields")),
+#     ("sf_checkbox", wff_blocks.CheckboxFieldBlock(group="Fields")),
+#     ("sf_date", wff_blocks.DateFieldBlock(group="Fields")),
+#     ("sf_time", wff_blocks.TimeFieldBlock(group="Fields")),
+#     ("sf_datetime", wff_blocks.DateTimeFieldBlock(group="Fields")),
+#     ("sf_image", wff_blocks.ImageFieldBlock(group="Fields")),
+#     ("sf_file", wff_blocks.FileFieldBlock(group="Fields")),
+#     # And content blocks from Wagtail!
+#     ("text", blocks.RichTextBlock(group="Content")),
+#     ("image", ImageBlock(group="Content")),
+# ]
+
+
+# from wagtail_flexible_forms.models import AbstractSessionFormSubmission
+# from wagtail_flexible_forms.models import AbstractSubmissionRevision
+#
+#
+# class MySubmissionRevision(AbstractSubmissionRevision):
+#     pass
+#
+#
+# class MySessionFormSubmission(AbstractSessionFormSubmission):
+#     @staticmethod
+#     def get_revision_class():
+#         return MySubmissionRevision
+
+
+# from wagtail.admin.panels import FieldPanel
+# from wagtail.contrib.forms.models import FormSubmission
+# from wagtail.fields import RichTextField
+# from wagtail.fields import StreamField
+# from wagtail.models import Page
+# from wagtail_flexible_forms.models import StreamFormMixin
+
+
+# class StreamFormPage(StreamFormMixin, Page):
+#     template = "home/stream_form_page.html"
+#     landing_page_template = "home/form_page_landing.html"
+#
+#     # Typical Wagtail field, like any other page.
+#     intro = RichTextField(blank=True)
+#
+#     # Set ``form_fields`` to contain our Streamform fields.
+#     form_fields = StreamField(STREAMFORM_FIELDS)
+#
+#     content_panels = Page.content_panels + [
+#         FieldPanel("intro"),
+#         FieldPanel("form_fields"),
+#     ]
+#
+#     @staticmethod
+#     def get_submission_class():
+#         """
+#         Submission class is used to store the final form
+#         submission, after the user has finished their session.
+#
+#         For simplicity, use Wagtail's default FormSubmission class.
+#         """
+#         return FormSubmission
+#
+#     @staticmethod
+#     def get_session_submission_class():
+#         """
+#         Session submission class is used to store temporary
+#         data while the form is being filled out, i.e. for
+#         multi-step forms.
+#
+#         You must return something that inherits from
+#         ``AbstractSessionFormSubmission``.
+#         """
+#         return MySessionFormSubmission

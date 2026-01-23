@@ -9,6 +9,9 @@ stripe
 django-storages
 boto3
 wagtailcodeblock
+wagtail-django-recaptcha
+
+
 
 
 

@@ -4,12 +4,10 @@ from decouple import config
 import os
 
 
-
 SECRET_KEY = config('SECRET_KEY')
 # DEBUG = config('DEBUG', default=False, cast=bool)
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
-
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,6 +49,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "widget_tweaks",
     "wagtailcodeblock",
+    "wagtailcaptcha",
+    # "wagtail_flexible_forms",
 ]
 
 MIDDLEWARE = [
@@ -167,7 +167,7 @@ SESSION_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_PATH = "/"
 # SESSION_COOKIE_SAMESITE = False
 
-
+WAGTAIL_ENABLE_UPDATE_CHECK = False
 
 LANGUAGE_CODE = "en-us"
 
@@ -226,8 +226,17 @@ STORAGES = {
         },
 }
 
+
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+EMAIL_HOST = config('EMAIL_HOST')
+DEFAULT_FROM_EMAIL = config('FROM_EMAIL')
+EMAIL_HOST_USER = config('EMAIL_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 
 
