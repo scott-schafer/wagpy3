@@ -8,6 +8,7 @@ from django.http import HttpRequest
 from django.shortcuts import render
 from wagtail_modeladmin.options import ModelAdmin, modeladmin_register
 from wagtail.admin.panels import FieldPanel
+from wagtail.documents.blocks import DocumentChooserBlock
 from django.conf import settings
 from decouple import config
 from products.models import Product
@@ -52,5 +53,6 @@ class MyPurchases(Page):
         """Provide additional context information."""
         context = super().get_context(request)
         my_objects = Purchase.objects.filter(user=request.user.id)
+        # my_objects = Purchase.objects.all().filter(user=request.user.is_authenticated)
         context['my_objects'] = my_objects
         return context

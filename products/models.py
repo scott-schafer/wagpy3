@@ -5,6 +5,9 @@ from wagtail.fields import StreamField
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.models import Document, AbstractDocument
 from wagtail.documents import get_document_model
+from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from decouple import config
 import pathlib
 import stripe
@@ -38,7 +41,6 @@ class ProductListingPage(Page):
         context = super().get_context(request, *args, **kwargs)
         context["products"] = Product.objects.all()
         return context
-
 
 
 class Product(Page):
@@ -143,3 +145,21 @@ class CustomDocument(AbstractDocument):
         'is_free',
         'is_active',
     )
+
+
+@login_required
+def product_ownership_view(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    # Assuming your Product model has a ForeignKey field named 'owner'
+    if request.user == product.user:
+        # User owns the product, render the page
+        return render(request, 'products/product.html', {'product': product})
+    else:
+        # User does not own the product, return 403 Forbidden
+        return HttpResponseForbidden("You do not own this product.")
+
+
+def get_context(self, request, *args, **kwargs):
+    context = super().get_context(request, *args, **kwargs)
+    return context

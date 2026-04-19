@@ -1,28 +1,12 @@
+{% extends 'base.html' %}
 
 {% load static wagtailcore_tags %}
-
-
-{#{% block title %}SignUp{% endblock %}#}
-{#{% block content %}#}
-{#<form action="">#}
-{#{% csrf_token %}#}
-{#    <h1>Sign Up Screen</h1>#}
-{#    {{ form }}#}
-{##}
-{##}
-{##}
-{#</form>#}
-{##}
-{#    <h1>Yo Momma</h1>#}
-{#{% endblock %}#}
-
-
 
 {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 {% endblock %}
 
-
+{% block content %}
 <section class="bg-gray-50 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
@@ -57,62 +41,5 @@
       </div>
   </div>
 </section>
+{% endblock content %}
 
-
-
-
-
-
-
-
-
-
-
-{##}
-{#{% extends "account/base_entrance.html" %}#}
-{#{% load allauth i18n %}#}
-{#{% block head_title %}#}
-{#    {% trans "Signup" %}#}
-{#{% endblock head_title %}#}
-{#{% block content %}#}
-{#    {% element h1 %}#}
-{#        {% trans "Sign Up" %}#}
-{#    {% endelement %}#}
-{#    {% setvar link %}#}
-{#        <a href="{{ login_url }}">#}
-{#        {% endsetvar %}#}
-{#        {% setvar end_link %}#}
-{#        </a>#}
-{#    {% endsetvar %}#}
-{#    {% element p %}#}
-{#        {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}#}
-{#    {% endelement %}#}
-{#    {% if not SOCIALACCOUNT_ONLY %}#}
-{#        {% url 'account_signup' as action_url %}#}
-{#        {% element form form=form method="post" action=action_url tags="entrance,signup" %}#}
-{#            {% slot body %}#}
-{#                {% csrf_token %}#}
-{#                {% element fields form=form unlabeled=True %}#}
-{#                {% endelement %}#}
-{#                {{ redirect_field }}#}
-{#            {% endslot %}#}
-{#            {% slot actions %}#}
-{#                {% element button tags="prominent,signup" type="submit" %}#}
-{#                    {% trans "Sign Up" %}#}
-{#                {% endelement %}#}
-{#            {% endslot %}#}
-{#        {% endelement %}#}
-{#    {% endif %}#}
-{#    {% if PASSKEY_SIGNUP_ENABLED %}#}
-{#        {% element hr %}#}
-{#        {% endelement %}#}
-{#        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}#}
-{#            {% trans "Sign up using a passkey" %}#}
-{#        {% endelement %}#}
-{#    {% endif %}#}
-{#    {% if SOCIALACCOUNT_ENABLED %}#}
-{#        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}#}
-{#    {% endif %}#}
-{##}
-{#    <h1>Yo Momma</h1>#}
-{#{% endblock content %}#}

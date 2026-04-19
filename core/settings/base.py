@@ -20,7 +20,9 @@ INSTALLED_APPS = [
     "purchases",
     "search",
     "blog",
-    "forms",
+    "contact",
+    "signup",
+    # "forms",
     "app_blocks",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -286,7 +288,7 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 # This can be omitted to allow all files, but note that this may present a security risk
 # if untrusted users are allowed to upload files -
 # see https://docs.wagtail.org/en/stable/advanced_topics/deploying.html#user-uploaded-files
-WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip', 'png', 'jpg']
+WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip', 'png', 'jpg', 'tar']
 
 WAGTAILDOCS_DOCUMENT_MODEL = 'products.CustomDocument'
 WAGTAILDOCS_SERVE_METHOD = 'redirect'

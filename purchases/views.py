@@ -110,7 +110,6 @@ def purchase_success_view(request):
     return render(request, 'purchases/success.html', {'session': session})
 
 
-
 def purchase_stopped_view(request):
     purchase_id = request.session.get("purchase_id")
     if purchase_id:
@@ -119,6 +118,7 @@ def purchase_stopped_view(request):
         del request.session['purchase_id']
         return HttpResponseRedirect(product.url)
     return HttpResponse("Stopped")
+
 
 def redirect_view(request):
     response = redirect(checkout_session.url)

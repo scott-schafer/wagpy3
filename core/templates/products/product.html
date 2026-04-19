@@ -5,9 +5,23 @@
 
 
     {% specific_purchase_data as data %}
+    <br>
+
+    {# TEST AREA #}
+    {% for obj in my_objects %}
+        {% if obj.product_name == page.product_name %}
+{#        {{ obj.product_name }}<br>#}
+
+{#        {{ obj.user.id }}<br>#}
+{#            {{ user.id }}#}
+        {% endif %}
+    {% endfor %}
+
+    {# END TEST AREA #}
+
     <section class="w-full flex justify-between">
-        <div class="containerr mt-[50px] bg--white flex flex-col md:flex-row dark:bg--gray-800">
-            <div class="w-full md:w-3/4 space-y-10 p-[30px]">
+        <div class="px-10 mt-[50px] bg--white flex flex-col md:flex-row dark:bg--gray-800">
+            <div class="md:w-3/4 space-y-10 md:pr-10">
                 <!-- main content-->
                 <h2 class="text-4xl font-bold md:mb-[50px] dark:text-white">{{ page.product_name }}</h2>
 
@@ -28,31 +42,21 @@
                         Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Download
+                        Status
                     </th>
                 </tr>
                 </thead>
                 <tbody>
+                <a href=""></a>
                 {% for block in page.product_attachment %}
                     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                         <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            class="px-6 py-4 font-medium text-gray--900 text--(--color-primary) whitespace-nowrap dark:text-white">
                             {{ block.value.title }}
                         </th>
-                        <td class="px-6 py-4">
-                            {% if block.value.is_free %}Free download {% else %}Included with
+                        <td class="px-6 py-4 text-(--color-primary)">
+                            {% if block.value.is_free %}<a href="{{ block.value.url }}" class="text-indigo-400 hover:text-indigo-300">Free download</a> {% else %}Included with
                                 Purchase {% endif %}
-                        </td>
-                        <td class="px-6 py-4 overflow-hidden">
-                            {% for item in my_objects %}
-                                {% if page.title == item.product_name %}
-                                    <a href="{{ block.value.url }}" target="_blank"
-                                       class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Download</a>
-                                {% else %}
-                                {% endif %}
-                            {% endfor %}
                         </td>
                     </tr>
                 {% endfor %}
@@ -62,14 +66,13 @@
         </div>
 
         <!-- sidebar -->
-        <div class="bg-white mt-[50px] pr-5 w-full md:w-1/4 space-y-4 dark:bg-gray-800 mx-auto">
+        <div class="bg-white mt-[50px] w-full md:w-1/4 space-y-4 dark:bg-gray-800 mx-auto sm:rounded-lg">
 
             <div class="pt-[30px]">
-                {% for obj in my_objects %}
-                    {% if forloop %}
-                        {% if page.id == obj.product_id and obj.is_owner %}
-                            <p class="text-center font-bold dark:text-white">You own this product.</p>
-                        {% endif %}
+                {% for item in my_objects %}
+{#                    {% if page.product_name == item.product_name %}#}
+                    {% if page.product_name == item.product_name and user.id == item.user.id %}
+                      <p class="text-center font-bold dark:text-white">You own this product.</p>
                     {% endif %}
                 {% endfor %}
 
@@ -85,19 +88,20 @@
                             <span class="text-3xl font-semibold">$</span>
                             <span class="text-5xl font-extrabold tracking-tight">{{ page.price }}</span>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center my-5">
                             {% if not request.user.is_authenticated %}
                                 <a class="w-full my-5 text-white text-center" href="/accounts/login/">Login
                                     or SignUp to Purchase</a>
                             {% endif %}
                         </div>
-                        {% if user.is_authenticated or not_owner %}
+
+{#                        {% if user.is_authenticated or not_owner %}#}
                             <button type="submit"
                                     class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
                                 Buy Now
                             </button>
-                        {% else %}
-                        {% endif %}
+{#                        {% else %}#}
+{#                        {% endif %}#}
                     </form>
                 {% endif %}
 

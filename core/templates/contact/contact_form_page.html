@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
+
+{# Contact Form #}
+{% block content %}
+<section>
+    <div class="relative isolate px-2 py-14 sm:py-32 lg:px-8 mx-auto max-w-screen-xl">
+        <div aria-hidden="true" class="absolute inset-x-0 top-0 -z-10  transform-gpu overflow-hidden blur-3xl sm:--top-40">
+            <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+                 class="relative left-1/2 -z-20 aspect-1155/678 w-144.5 max-w-none -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 dark:opacity-6 sm:left-[calc(50%-40rem)] sm:w-288.75"></div>
+        </div>
+        <div id="contact" class="mx-auto max-w-2xl text-center opacity-90">
+            <h2 class="text-4xl font-semibold tracking-tight text-balance sm:text-5xl mt-10">{{ page.sub_title }}</h2>
+            <p class="mt-2 text-lg/8">{{ page.intro|richtext}}</p>
+        </div>
+<form action="{% pageurl page %}" method="POST" role="form" class="mx-auto mt-16 max-w-xl sm:mt-20">
+            {% csrf_token %}
+        <div class="grid grid-cols-2 gap-8">
+            {% for field in form %}
+                {% if field.label == "first_name" %}
+                    {% render_field field class+="basis-full rounded-md bg-white/5 dark:bg--(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)" placeholder=field.help_text|safe %}
+                {% endif %}
+
+                {% if field.label == "last_name" %}
+                     {% render_field field class+="basis-full rounded-md bg-white/5 dark:bg--(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)" placeholder=field.help_text|safe %}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="mt--6">
+            {% for field in form %}
+                    {% if field.label == "company_name" %}
+                        {% render_field field class+="mt-8 w-full rounded-md bg-white/5 dark:bg--(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)" placeholder=field.help_text|safe %}
+                    {% endif %}
+
+                    {% if field.label == "email_address" %}
+                        {% render_field field class+="mt-8 w-full rounded-md bg-white/5 dark:bg--(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)" placeholder=field.help_text|safe %}
+                    {% endif %}
+
+                    {% if field.label == "subject" %}
+                        {% render_field field class+="mt-8 w-full rounded-md bg-white/5 dark:bg--(--bg-primary) px-3.5 py-2 focus:ring-2 focus:ring-(--color-primary) border-(--color-primary)" placeholder=field.help_text|safe %}
+                    {% endif %}
+            {% endfor %}
+        </div>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha mt-10" data-sitekey="6LfWXbsjAAAAACftWrYZpr3-fWJOBaRQ_XxkrsFQ" data-theme="dark"></div>
+    <div class="mt-10">
+            <button type="submit"
+                    class="block w-2/4 rounded-md px-3.5 py-2.5 text-center text-sm font-semibold shadow-xs border-(--color-primary) border-1 hover:text-gray-200 focus:ring-4 focus:ring-gray-100 dark:text-white hover:bg-(--color-primary) dark:hover:bg-(--hover-dark) dark:focus:ring-gray-800">
+                Let's talk
+            </button>
+        </div>
+</form>
+        <div aria-hidden="true"
+             class="absolute isolate inset-x-0 top--[calc(100%-13rem)] -z-1 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-35rem)]">
+            <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+                 class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] sm:left-[calc(50%+36rem)] sm:w-288.75 -z-10 opacity-35 dark:opacity-6"></div>
+        </div>
+    </div>
+    </section>
+{% endblock %}

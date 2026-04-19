@@ -49,38 +49,13 @@ class FormField(CustomAbstractFormField):
         related_name="form_fields",
     )
 
-# class FormPage(AbstractEmailForm):
-#     intro = RichTextField(blank=True)
-#     thank_you_text = RichTextField(blank=True)
-#
-#     content_panels = AbstractEmailForm.content_panels + [
-#         FieldPanel('intro'),
-#         FieldPanel('thank_you_text'),
-#         MultiFieldPanel([
-#             InlinePanel("my_form_fields", label="Form Fields"),
-#             FieldPanel("thank_you_text"),
-#             FieldPanel("from_address"),
-#             FieldPanel("to_address"),
-#             FieldPanel("subject"),
-#         ], heading="Email Form Information"),
-#     ]
-
-
-# class FormField(CustomAbstractFormField):
-#     page = ParentalKey(
-#         "FormPage",
-#         blank=True,
-#         null=True,
-#         on_delete=models.CASCADE,
-#         related_name="my_form_fields",
-#     )
-
 
 class HomePage(AbstractEmailForm):
     template = "home/home_page.html"
     max_count = 1
 
     sub_title = models.CharField(max_length=255, blank=True, null=True)
+    intro_text = RichTextField(blank=True, null=True)
     thank_you_text = RichTextField(
         blank="True"
     )
@@ -91,6 +66,7 @@ class HomePage(AbstractEmailForm):
 
     content_panels = Page.content_panels + [
         FieldPanel("sub_title"),
+        FieldPanel("intro_text"),
         FieldPanel("body"),
         MultiFieldPanel([
             InlinePanel("form_fields", label="Form Fields"),
@@ -98,7 +74,7 @@ class HomePage(AbstractEmailForm):
             FieldPanel("from_address"),
             FieldPanel("to_address"),
             FieldPanel("subject"),
-        ], heading="Email Form Information"),
+        ], heading="Mailing List Form Information"),
     ]
 
     def get_context(self, request, *args, **kwargs):

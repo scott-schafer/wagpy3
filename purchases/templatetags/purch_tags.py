@@ -1,126 +1,109 @@
 from django.db import models
 from django.contrib.auth.models import User, AnonymousUser
+from wagtail.models import Page
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseForbidden
 
 from django.http import HttpRequest
 from django.template import loader
 from django import template
-from django.shortcuts import render
+# from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from wagtail.models import Page
 from products.models import Product
 from purchases.models import Purchase, MyPurchases
 
 register = template.Library()
 
-# def object_user(request: HttpRequest):
-#     user = request.user
-#     # user_object = Purchase.objects.filter(user=user, is_owner=True)
-#     purchase = Purchase.objects.all().values()
-#     # print(purchase)
-#     # return purchase
+
+def purchase_owner(request):
+    objects = Purchase.objects.all()
+    # products = Product.objects.all()
+    user = request.user.is_authenticated
+    for item in objects:
+        if item.is_owner:
+            return True
+        else:
+            return False
 
 
 
-# def page_data(request: HttpRequest):
-#     user = request.user
-#     my_objects = Purchase.objects.filter(user=user)
-#     if user.is_authenticated:
-#         for obj in my_objects:
-#             product_data = obj.product_id
-#             return product_data
-
-
-
-
-# def trigger(request: HttpRequest):
+# start Test
+# def purchase_owner(request):
 #     user = request.user.is_authenticated
-#     my_objects = Purchase.objects.filter(user=request.user.id)
-#     if user:
-#         for obj in my_objects:
-#             if obj.product_id:
-#                 return True
-#             else:
-#                 return False
+#     objects = Purchase.objects.get(complete=complete)
+#     # return objects
+#     # products = Product.objects.all()
+#     if objects:
+#         return True
+#     else:
+#         return False
+# End Test
 
 
 
-# def product_name(request: HttpRequest):
-#     user = request.user
-#     my_objects = Purchase.objects.filter(user=user)
-#     if user.is_authenticated:
-#         my_obj = []
-#         for obj in my_objects:
-#             my_obj.append(obj.product_name)
-#         # return my_obj
-#             # for i in my_obj:
-#             #     if i == obj.product_name:
-#             #         return i
+def product_name(request):
+    objects = Purchase.objects.all()
+    user = request.user.is_authenticated
+    for item in objects:
+        if item.is_owner:
+            return item
+            return True
+        else:
+            return False
+
+
+def current_page(request):
+
+    user = request.user.is_authenticated
+    objects = Purchase.objects.all()
+    current = request.path
+    # test = objects.product.url
+    for item in objects:
+        if item.product.url == current:
+            return True
+        else:
+            return False
+
+# @login_required
+# def product_ownership(request, product_id):
+#     product = get_object_or_404(Product, product_id=product_id)
 #
-#             # return my_obj
-#             return str(my_obj).replace('[','').replace(']','').replace(',','').replace("'", " ")
+#     # Assuming your Product model has a ForeignKey field named 'owner'
+#     if request.user == product.owner:
+#         # return True
+#         # User owns the product, render the page
+#         return render(request, 'product_detail.html', {'product': product})
+#     else:
+#         # return False
+#         # User does not own the product, return 403 Forbidden
+#         return HttpResponseForbidden("You do not own this product.")
 
 
-
-# def user_auth(request: HttpRequest):
-#
-#     user = request.user.is_authenticated
-#     my_objects = Purchase.objects.filter(user=request.user.id, is_owner=True)
-#     if user:
-#         for obj in my_objects:
-#             prod_obj = obj
-#             return prod_obj
-
-
-
-
-
-
-
-
-
-
-
+@login_required
+def product_ownership(request):
+    user = request.user.is_authenticated
+    # product_id = request.session['product_id'] = product.id
+    # product = get_object_or_404(Product, product_id=product_id)
+    product = Product.objects.all().values_list('id', flat=True)
+    # user_id = Product.objects.all().values_list('user.id', flat=True)
+    # Assuming your Product model has a ForeignKey field named 'owner'
+    # for item in product:
+    # if request.user == item.user:
+    if request.user:
+        return product
+        # User owns the product, render the page
+        # return render(request, 'product.html', {'product': product})
+    else:
+        return False
+        # User does not own the product, return 403 Forbidden
+        # return HttpResponseForbidden("You do not own this product.")
 
 
-
-
-
-# def testing(request):
-#     # request = context['request']
-#     mydata = Purchase.objects.filter('product_name').values_list('product_name', flat=True)
-#     # template = loader.get_template('template.html')
-#     context = {
-#     'mymembers': mydata,
-#     }
-
-# def direct(request):
-#     # user = request.user
-#     user = request.user.is_authenticated
-#     # page = Page.objects.defer('id').all()
-#     # product = Product.objects.filter(product_name=product_name)
-#     mydata = Purchase.objects.filter(user=user)
-#     prod_name = []
-#     # for obj in mydata:
-#     #     prod_name.append(obj.product_name)
-#     # # return prod_name
-#     # return str(prod_name).replace('[', '').replace(']', '').replace(',', '').replace("'", " ")
-#     context = {
-#         mydata
-#     }
-#     # return (context, request)
-#     return mydata
-
-# def not_owner(request: HttpRequest):
-#     user = request.user.is_authenticated
-#     my_objects = Purchase.objects.filter(user=request.user.id)
-#     data = []
-#     if user:
-#         for obj in my_objects:
-#             data.append(obj.product_id)
-#         return data
-            # print(data)
-
-
+def is_product_owner(request):
+    user = request.user.is_authenticated
+    # is_owner = Purchase.objects.values('is_owner').filter(user=user)
+    is_owner = Purchase.objects.filter(user=user)
+    return is_owner
 
 
 
@@ -140,17 +123,35 @@ def specific_purchase_data(context):
     # context['prod_name'] = direct(request)
     # context['testing'] = Purchase.objects.filter(user=user).values_list('product_name', flat=True)
     # context['page_obj'] = page_data()
-    # is_owner = Purchase.objects.all()
+    # is_owner = Purchase.objects.get(is_owner=is_owner)
     # context['is_owner'] = is_owner
     # purchase_objects = Purchase.objects.filter()
-    # context["purchase_objects"] = purchase_objects
-    # my_objects = Purchase.objects.all()
+    # my_objects = Purchase.objects.filter(user=request.user.is_authenticated)
+    # context["current_page"] = current_page(request)
+    context["current_page"] = current_page(request)
+    context["purchase_owner"] = purchase_owner(request)
+    context["product_name"] = product_name(request)
+    context["is_product_owner"] = is_product_owner(request)
 
     user = request.user.is_authenticated
-    my_objects = Purchase.objects.filter(user=request.user.id, is_owner=True)
+    # my_objects = Purchase.objects.filter(user=user, is_owner=True)
+    my_objects = Purchase.objects.all()
+    products = Product.objects.all()
     context['my_objects'] = my_objects
+    # context['my_objects'] = my_objects
+    context['products'] = products
     return context
 
+# def download(request):
+#     user = request.user.is_authenticated
+#     purchases_to_display = []
+#     items = Purchase.objects.all()
+#     for item in items:
+#         if page.id == item.product_id:
+#             break
+#     context = {
+#         'products': purchases_to_display
+#     }
 
 
 # @register.simple_tag(takes_context=True)
@@ -175,9 +176,6 @@ def specific_purchase_data(context):
 #         return False
 
 
-
-
-
 # @register.simple_tag()
 # def just_purchase_data():
 #     # purchase_objects = Purchase.objects.all()
@@ -188,52 +186,48 @@ def specific_purchase_data(context):
 #     # return context
 
 
+# for obj in purchase_objects:
+#     if obj.product_id:
+#         print("Oh Yeah!")
+#     else:
+#         print("WTF!")
+
+# return
+# return context
 
 
-    # for obj in purchase_objects:
-    #     if obj.product_id:
-    #         print("Oh Yeah!")
-    #     else:
-    #         print("WTF!")
+# for obj in purchase_objects:
+#     owner = obj.user
+#     page = obj.product_id
+#     # break
+#     # current_user = user.is_authenticated and user == obj.user
+#     current_user = user.is_authenticated and user == owner
+#     context['current_user'] = current_user
+#     current_page = page
+#     context['current_page'] = current_page
+#     break
 
-    # return
-    # return context
-
-
-
-    # for obj in purchase_objects:
-    #     owner = obj.user
-    #     page = obj.product_id
-    #     # break
-    #     # current_user = user.is_authenticated and user == obj.user
-    #     current_user = user.is_authenticated and user == owner
-    #     context['current_user'] = current_user
-    #     current_page = page
-    #     context['current_page'] = current_page
-    #     break
-
-        # return specific_purchase_data
-        # return context
+# return specific_purchase_data
+# return context
 
 
-
-    # for obj in specific_objects:
-    #     user = request.user
-    #     page_id = obj.id
-    #     context["page_id"] = page_id
-    #     product_name = obj.product_name
-    #     context["product_name"] = product_name
-    #     current_user = user.is_authenticated and user == obj.user
-    #     # complete = obj.complete
-    #     # context["complete"] = complete
-    #
-    #     if current_user:
-    #         return True
-    #     else:
-    #         return False
-    # return specific_purchase_data()
-    # Access request attributes, e.g., request.user, request.path
-    # return request.user
+# for obj in specific_objects:
+#     user = request.user
+#     page_id = obj.id
+#     context["page_id"] = page_id
+#     product_name = obj.product_name
+#     context["product_name"] = product_name
+#     current_user = user.is_authenticated and user == obj.user
+#     # complete = obj.complete
+#     # context["complete"] = complete
+#
+#     if current_user:
+#         return True
+#     else:
+#         return False
+# return specific_purchase_data()
+# Access request attributes, e.g., request.user, request.path
+# return request.user
 
 # @register.simple_tag(takes_context=True)
 # def specific_purchase_data():
@@ -256,7 +250,6 @@ def specific_purchase_data(context):
 #     current_user = request.user
 #     context = {'user': current_user}
 #     return context
-
 
 
 # @register.simple_tag(takes_context=True)

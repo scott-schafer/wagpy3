@@ -1,26 +1,101 @@
-{#{% extends "base.html" %}#}
+{% extends "base.html" %}
+{% load static wagtailcore_tags %}
 
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <ul>
-{#    {{ my_objects }}#}
-    {% for obj in my_objects %}
-{#        {{ obj }}#}
-        <li>
-{#        {{ obj }}#}
-            <p>{{ obj.product_name }}</p>
-            <p>{{ obj.user }}</p>
-            <p>{{ obj.is_owner }}</p>
-            <p>{{ obj.product_id }}</p>
-            <p>{{ obj.complete }}</p>
-        </li>
-    {% empty %}
-        <li>No objects found.....</li>
-    {% endfor %}
-    </ul>
+{% if user.is_authenticated %}
+    <h1 class="text-4xl text-center mt-4">{{ page.title }}</h1>
+{#    <ul>#}
+{##}
+{#    {% for obj in my_objects %}#}
+{##}
+{#        <li>#}
+{##}
+{#            <p>{{ obj.product_name }}</p>#}
+{#            <p>{{ obj.user }}</p>#}
+{#            <p>{{ obj.is_owner }}</p>#}
+{#            <p>{{ obj.product_id }}</p>#}
+{#            <p>{{ obj.complete }}</p>#}
+{#        </li>#}
+{#    {% empty %}#}
+{#        <li>No objects found.....</li>#}
+{#    {% endfor %}#}
+{#    </ul>#}
 
-    {% for item in product_model %}
-        {{ item }}
-    {% endfor %}
+{{ product.product_attachment }}
+
+{% if page.product_attachment %}
+                {% for block in page.product_attachment %}
+                {{ block.value.title }}
+
+                {% endfor %}
+
+            {% endif %}
+
+
+
+
+
+<div>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
+
+  </div>
+  <div class="mt-8 flow-root overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <table class="w-full text-left">
+{#        <thead class="bg-gray--900 border-b-2 border-b-(--color-primary)">#}
+        <thead class="bg-gray--900 border-b-2 border-b-white/15">
+          <tr class="">
+            <th scope="col" class="relative isolate px--3.5 py-3.5 pr-3 text-left text-sm font-semibold text-white">
+              Product Name
+{#              <div class="absolute inset-y-0 right-full -z-10 w-screen border-b border-b-white/15"></div>#}
+{#              <div class="absolute inset-y-0 left-0 -z-10 w-100 border-b border-b-(--color-primary)"></div>#}
+            </th>
+            <th scope="col" class="px-3 py-4.5 text-left text-sm font-semibold text-white sm:table-cell">Invoice #</th>
+            <th scope="col" class="px-3 py-4.5 text-left text-sm font-semibold text-white md:table-cell">Purchase Date</th>
+            <th scope="col" class="px-3 py-4.5 text-left text-sm font-semibold text-white md:table-cell">Price</th>
+{#            <th scope="col" class="px-3 py-4.5 text-right text-sm font-semibold text-white md:table-cell">Download</th>#}
+          </tr>
+        </thead>
+        <tbody>
+        {% for obj in my_objects %}
+          <tr class="border-b border-b-white/15">
+            <td class="relative py-4 pr-3 text-sm font-medium text--white text-(--color-primary)">
+              {{ obj.product_name }}
+
+            </td>
+            <td class="py-4 text-sm text-gray-400 sm:table-cell">{{ obj.purchase_invoice }}</td>
+            <td class="px-3 py-4 text-sm text-gray-400">{{ obj.timestamp }}</td>
+            <td class="px-3 py-4 text-sm text-gray-400 md:table-cell">{{ obj.product.price }}</td>
+{#            <td class="px-3 py--4 text-right text-sm font-medium">#}
+{#              <a href="#" class="text-indigo-400 hover:text-indigo-300">Download</a>#}
+{#            </td>#}
+          </tr>
+            {% for block in obj.product.product_attachment %}
+            <tr class="ml-6">
+                <td class="px-8 py-2 text-sm text-gray-400 sm:table-cell">
+                    <a href="{{ block.value.url }}" class="text-indigo-400 hover:text-indigo-300">{{ block.value.title }}</a>
+                </td>
+{#                <td class="px--3 py--2 text-right text-sm font-medium">#}
+{#                  <a href="#" class="text-indigo-400 hover:text-indigo-300">Download</a>#}
+{#                </td>#}
+
+            </tr>
+{#            <td class="px--3 py--2 text-right text-sm font-medium">#}
+{#              <a href="#" class="text-indigo-400 hover:text-indigo-300">Download</a>#}
+{#            </td>#}
+            {% endfor %}
+
+        {% empty %}
+        <li>No Purchases Found...</li>
+        {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+{% endif %}
 {% endblock %}

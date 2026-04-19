@@ -1,57 +1,22 @@
-{#{% extends 'base.html' %}#}
+{% extends 'base.html' %}
 {% load static wagtailcore_tags account widget_tweaks %}
 
-{##}
-{#{% block title %}Login{% endblock %}#}
-{#{% block content %}#}
-{#<form action="">#}
-{#{% csrf_token %}#}
-{#    <h1>Login Screen</h1>#}
-{#    {{ form }}#}
-{#    {{ form.label.email }}#}
-{#    {% render_field form.email %}#}
-{##}
-{#</form>#}
-{#{% endblock %}#}
-{##}
 
-
-
-
-{##}
-{#{% block content %}#}
-{#<section class="bg-gray-50 dark:bg-gray-900">#}
-{##}
-{#    <div class="mt-4 flex justify-center">#}
-{#<h2>Log In</h2>#}
-{#<form method="post">#}
-{#  {% csrf_token %}#}
-{#  {{ form }}#}
-{#  <button class="btn p-4 bg-success" type="submit">Log In</button>#}
-{#    <button type="submit" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Login</button>#}
-{#</form>#}
-{#    </div>#}
-{#</section>#}
-{##}
-{#{% endblock %}#}
 
 {# ---------------------------- Flowbite Form Below --------------------------- #}
-
-
-
 
 {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 {% endblock %}
 
-
+{% block content %}
 <section class="bg-gray-50 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
           <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
           Flowbite
       </a>
-      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div class="w-full bg--white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign in to your account
@@ -89,3 +54,4 @@
   </div>
 </section>
 
+{% endblock content %}
